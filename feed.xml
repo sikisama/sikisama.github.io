@@ -4,8 +4,8 @@
         <description>sikisama的博客</description>
         <link>http://sikisama.github.io</link>
         <atom:link href="http://sikisama.github.io/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>2016-06-07 14:06:54</pubDate>
-        <lastBuildDate>2016-06-07 14:06:54</lastBuildDate>
+        <pubDate>2016-06-07 15:06:14</pubDate>
+        <lastBuildDate>2016-06-07 15:06:14</lastBuildDate>
         <generator>Gitblog v1.0</generator>
                 <item>
             <title>Git使用指南</title>
@@ -111,8 +111,8 @@ git tag -a [v] [sha]&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000&quot;&gt;git教程&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;            </description>
             <pubDate>2016-06-07 14:50:48</pubDate>
-            <link>http://sikisama.github.io/blog/git%2B%25CA%25B9%25D3%25C3%25D6%25B8%25C4%25CF.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/git%2B%25CA%25B9%25D3%25C3%25D6%25B8%25C4%25CF.html</guid>
+            <link>http://sikisama.github.io/blog/git_instruction_manual.html</link>
+            <guid isPermaLink="true">http://sikisama.github.io/blog/git_instruction_manual.html</guid>
                                                <category>Git</category>
                                     </item>
                 <item>
