@@ -4,9 +4,174 @@
         <description>sikisama的博客</description>
         <link>http://sikisama.github.io</link>
         <atom:link href="http://sikisama.github.io/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>2016-08-05 11:08:51</pubDate>
-        <lastBuildDate>2016-08-05 11:08:51</lastBuildDate>
+        <pubDate>2016-08-05 11:08:41</pubDate>
+        <lastBuildDate>2016-08-05 11:08:41</lastBuildDate>
         <generator>Gitblog v1.0</generator>
+                <item>
+            <title>正则表达式与preg函数</title>
+            <description>
+            &lt;!--
+author: zhangxuefeng
+date: 2016-06-27
+title: 正则表达式与preg函数
+tags: 正则表达式
+category: 正则表达式
+status: publish
+summary: 总结一些git常用的命令
+--&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.noupe.com/development/php-regular-expressions.html&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;operator&lt;/th&gt;
+&lt;th&gt;DESCRIPTION&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;^&lt;/td&gt;
+&lt;td&gt;The circumflex symbol marks the beginning of a pattern, although in some cases it can be omitted&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$&lt;/td&gt;
+&lt;td&gt;Same as with the circumflex symbol, the dollar sign marks the end of a search pattern&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td&gt;The period matches any single character&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;?&lt;/td&gt;
+&lt;td&gt;It will match the preceding pattern zero or one times&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;+&lt;/td&gt;
+&lt;td&gt;It will match the preceding pattern one or more times&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;*&lt;/td&gt;
+&lt;td&gt;It will match the preceding pattern zero or more times&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;|&lt;/td&gt;
+&lt;td&gt;Boolean OR&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;–&lt;/td&gt;
+&lt;td&gt;Matches a range of elements&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;()&lt;/td&gt;
+&lt;td&gt;Groups a different pattern elements together&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;Matches any single character between the square brackets&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;{min, max}&lt;/td&gt;
+&lt;td&gt;It is used to match exact character counts&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\d&lt;/td&gt;
+&lt;td&gt;Matches any single digit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\D&lt;/td&gt;
+&lt;td&gt;Matches any single non digit caharcter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\w&lt;/td&gt;
+&lt;td&gt;Matches any alpha numeric character including underscore (_)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\W&lt;/td&gt;
+&lt;td&gt;Matches any non alpha numeric character excluding the underscore character&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;\s&lt;/td&gt;
+&lt;td&gt;Matches whitespace character&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;EXAMPLE&lt;/th&gt;
+&lt;th&gt;DESCRIPTION&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/hello/’&lt;/td&gt;
+&lt;td&gt;It will match the word hello&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/^hello/’&lt;/td&gt;
+&lt;td&gt;It will match hello at the start of a string. Possible matches are hello or helloworld, but not worldhello&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/hello$/’&lt;/td&gt;
+&lt;td&gt;It will match hello at the end of a string.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/he.o/’&lt;/td&gt;
+&lt;td&gt;It will match any character between he and o. Possible matches are helo or heyo, but not hello&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/he?llo/’&lt;/td&gt;
+&lt;td&gt;It will match either llo or hello&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/hello+/’&lt;/td&gt;
+&lt;td&gt;It will match hello on or more time. E.g. hello or hellohello&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/he*llo/’&lt;/td&gt;
+&lt;td&gt;Matches llo, hello or hehello, but not hellooo&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/hello&lt;/td&gt;
+&lt;td&gt;world/’&lt;/td&gt;
+&lt;td&gt;It will either match the word hello or world&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/(A-Z)/’&lt;/td&gt;
+&lt;td&gt;Using it with the hyphen character, this pattern will match every uppercase character from A to Z. E.g. A, B, C…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/[abc]/’&lt;/td&gt;
+&lt;td&gt;It will match any single character a, b or c&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/abc{1}/’&lt;/td&gt;
+&lt;td&gt;Matches precisely one c character after the characters ab. E.g. matches abc, but not abcc&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/abc{1,}/’&lt;/td&gt;
+&lt;td&gt;Matches one or more c character after the characters ab. E.g. matches abc or abcc&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;‘/abc{2,4}/’&lt;/td&gt;
+&lt;td&gt;Matches between two and four c character after the characters ab. E.g. matches abcc, abccc or abcccc, but not abc&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&quot;常用函数&quot;&gt;常用函数&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;http://php.net/manual/zh/function.preg-match.php&quot;&gt;preg_match&lt;/a&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://php.net/manual/zh/function.preg-replace.php&quot;&gt;preg_repalce&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;game&quot;&gt;game&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;http://regex.alf.nu/&quot;&gt;title&lt;/a&gt;
+&lt;a href=&quot;http://felixc.at/regex.alf.nu&quot;&gt;answer&lt;/a&gt;&lt;/p&gt;            </description>
+            <pubDate>2016-08-05 11:00:48</pubDate>
+            <link>http://sikisama.github.io/blog/reg_express.html</link>
+            <guid isPermaLink="true">http://sikisama.github.io/blog/reg_express.html</guid>
+                                               <category>正则表达式</category>
+                                    </item>
                 <item>
             <title>Git使用指南</title>
             <description>
@@ -110,7 +275,7 @@ git tag -a [v] [sha]&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;http://codeigniter.org.cn/&quot;&gt;git参考手册&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000&quot;&gt;git教程&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;            </description>
-            <pubDate>2016-06-07 14:50:48</pubDate>
+            <pubDate>2016-08-05 11:12:07</pubDate>
             <link>http://sikisama.github.io/blog/git_instruction_manual.html</link>
             <guid isPermaLink="true">http://sikisama.github.io/blog/git_instruction_manual.html</guid>
                                                <category>Git</category>

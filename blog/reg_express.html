@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>sikisama的博客</title>
-	<meta name="keywords" content="正则表达式,正则表达式,sisama,博客,sikisama博客,sikisama的博客">
-	<meta name="description" content="sikisama的博客">
+	<title>正则表达式与preg函数|sikisama的博客</title>
+	<meta name="keywords" content="正则表达式,sikisama的博客">
+	<meta name="description" content="总结一些git常用的命令">
 	
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
@@ -30,27 +30,12 @@
 	</div>
 </div>
 </header>		    <div id="content">
-					    	    	
-    	    		<div class="quest-row" id="title-container">
-	<div class="container title-container">
-		<div class="row">
-			<div class="col-md-6">
-								<h3>正则表达式</h3>
-							</div>
-			<div class="col-md-6">
-				<ul class="breadcrumbs">
-					<li><a href="/">Home</a></li>
-										<li>正则表达式</li>
-									</ul>
-				</div>
-		</div>
-	</div>
-</div>    		<div class="quest-row site-content">
+	<div class="quest-row site-content">
 		<div class="container">
 			<div class="row">
-				<div id="primary" class="content-area col-md-9">
+				<div id="primary" class="content-area single col-md-9">
 					<div id="main" class="site-main" role="main">
-																										        	<article class="post hentry">
+						<article class="post hentry">
 	<header class="entry-header">
 	<h1 class="post-title"><a href="/blog/reg_express.html" rel="bookmark">正则表达式与preg函数</a></h1>
 	<div class="entry-meta">
@@ -59,7 +44,163 @@
 	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
 	    	</div><!-- .entry-meta -->
 </header><!-- .entry-header -->	<div class="entry-content">
-		<p>总结一些git常用的命令</p>
+		<!--
+author: zhangxuefeng
+date: 2016-06-27
+title: 正则表达式与preg函数
+tags: 正则表达式
+category: 正则表达式
+status: publish
+summary: 总结一些git常用的命令
+-->
+<p><a href="http://www.noupe.com/development/php-regular-expressions.html">原文链接</a></p>
+<table>
+<thead>
+<tr>
+<th>operator</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>The circumflex symbol marks the beginning of a pattern, although in some cases it can be omitted</td>
+</tr>
+<tr>
+<td>$</td>
+<td>Same as with the circumflex symbol, the dollar sign marks the end of a search pattern</td>
+</tr>
+<tr>
+<td>.</td>
+<td>The period matches any single character</td>
+</tr>
+<tr>
+<td>?</td>
+<td>It will match the preceding pattern zero or one times</td>
+</tr>
+<tr>
+<td>+</td>
+<td>It will match the preceding pattern one or more times</td>
+</tr>
+<tr>
+<td>*</td>
+<td>It will match the preceding pattern zero or more times</td>
+</tr>
+<tr>
+<td>|</td>
+<td>Boolean OR</td>
+</tr>
+<tr>
+<td>–</td>
+<td>Matches a range of elements</td>
+</tr>
+<tr>
+<td>()</td>
+<td>Groups a different pattern elements together</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>Matches any single character between the square brackets</td>
+</tr>
+<tr>
+<td>{min, max}</td>
+<td>It is used to match exact character counts</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>Matches any single digit</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>Matches any single non digit caharcter</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>Matches any alpha numeric character including underscore (_)</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>Matches any non alpha numeric character excluding the underscore character</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>Matches whitespace character</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>EXAMPLE</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘/hello/’</td>
+<td>It will match the word hello</td>
+</tr>
+<tr>
+<td>‘/^hello/’</td>
+<td>It will match hello at the start of a string. Possible matches are hello or helloworld, but not worldhello</td>
+</tr>
+<tr>
+<td>‘/hello$/’</td>
+<td>It will match hello at the end of a string.</td>
+</tr>
+<tr>
+<td>‘/he.o/’</td>
+<td>It will match any character between he and o. Possible matches are helo or heyo, but not hello</td>
+</tr>
+<tr>
+<td>‘/he?llo/’</td>
+<td>It will match either llo or hello</td>
+</tr>
+<tr>
+<td>‘/hello+/’</td>
+<td>It will match hello on or more time. E.g. hello or hellohello</td>
+</tr>
+<tr>
+<td>‘/he*llo/’</td>
+<td>Matches llo, hello or hehello, but not hellooo</td>
+</tr>
+<tr>
+<td>‘/hello</td>
+<td>world/’</td>
+<td>It will either match the word hello or world</td>
+</tr>
+<tr>
+<td>‘/(A-Z)/’</td>
+<td>Using it with the hyphen character, this pattern will match every uppercase character from A to Z. E.g. A, B, C…</td>
+</tr>
+<tr>
+<td>‘/[abc]/’</td>
+<td>It will match any single character a, b or c</td>
+</tr>
+<tr>
+<td>‘/abc{1}/’</td>
+<td>Matches precisely one c character after the characters ab. E.g. matches abc, but not abcc</td>
+</tr>
+<tr>
+<td>‘/abc{1,}/’</td>
+<td>Matches one or more c character after the characters ab. E.g. matches abc or abcc</td>
+</tr>
+<tr>
+<td>‘/abc{2,4}/’</td>
+<td>Matches between two and four c character after the characters ab. E.g. matches abcc, abccc or abcccc, but not abc</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常用函数">常用函数</h2>
+<ol>
+<li>
+<p><a href="http://php.net/manual/zh/function.preg-match.php">preg_match</a> </p>
+</li>
+<li><a href="http://php.net/manual/zh/function.preg-replace.php">preg_repalce</a></li>
+</ol>
+<h2 id="game">game</h2>
+<p><a href="http://regex.alf.nu/">title</a>
+<a href="http://felixc.at/regex.alf.nu">answer</a></p>
 	</div><!-- .entry-content -->	<footer class="entry-footer">
 		<ul class="post-categories">
           
@@ -70,35 +211,30 @@
                    <li><a href="/tags/372555671.html" rel="tag">正则表达式</a></li>
         	</ul>
 		
-		<div class="read-more">
-		<a href="/blog/reg_express.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        													        	<article class="post hentry">
-	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/git_instruction_manual.html" rel="bookmark">Git使用指南</a></h1>
-	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-06-07</time>
-				<span class="seperator">/</span>
-	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
-	    	</div><!-- .entry-meta -->
-</header><!-- .entry-header -->	<div class="entry-content">
-		<p>总结一些git常用的命令</p>
-	</div><!-- .entry-content -->	<footer class="entry-footer">
-		<ul class="post-categories">
-          
-          <li><a href="/category/1141897447.html" rel="category">Git</a></li>
-        	</ul>
-		
-		<ul class="post-tags">
-                   <li><a href="/tags/1141897447.html" rel="tag">Git</a></li>
-        	</ul>
-		
-		<div class="read-more">
-		<a href="/blog/git_instruction_manual.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        																		</div>
+	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
+	<div id="respond" class="comment-respond">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="381e499502c87ded515881b544da0180" data-title="正则表达式与preg函数" data-url="http://sikisama.github.io/blog/reg_express.html"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"sikisama"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+        <!-- 多说公共JS代码 end -->
+	</div><!-- #respond -->
+</div>
+					</div>
 					<!-- #main -->
 				</div>
+				<!-- #primary -->
 				<div id="secondary" class="widget-area main-sidebar col-md-3" role="complementary">
 	<aside class="widget widget_search sidebar-widget clearfix">
 	<h3 class="widget-title">搜索</h3>
@@ -148,7 +284,7 @@
 		<!-- .container -->
 	</div>
 	<!-- .quest-row -->
-</div><!-- #content -->		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
+</div>		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 copyright-text">
