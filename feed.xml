@@ -4,9 +4,82 @@
         <description>sikisama的博客</description>
         <link>http://sikisama.github.io</link>
         <atom:link href="http://sikisama.github.io/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>2016-08-05 11:08:41</pubDate>
-        <lastBuildDate>2016-08-05 11:08:41</lastBuildDate>
+        <pubDate>2016-08-05 11:08:26</pubDate>
+        <lastBuildDate>2016-08-05 11:08:26</lastBuildDate>
         <generator>Gitblog v1.0</generator>
+                <item>
+            <title>mdx重要概念</title>
+            <description>
+            &lt;!--
+author: zhangxuefeng
+date: 2016-07-07
+title: mdx重要概念
+tags: mdx
+category: study
+status: publish
+summary: mdx重要概念
+--&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mdx为多维数据库提供了表达式语查询语法，用于cube数据，并提供了许多强大的分析函数，用于支持常用的OLAP分析。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;语法&quot;&gt;语法&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;维度、级别、成员等，一般用唯一名称UniqueName来标示，可以用[]包围name,如果name有空格或者数字开头，必须使用[],否则可以忽略。UniqueName是根据层次结构表示的一种方法。即递归显示出祖先的名称。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;维度（Dimension):维度直接用[]包围。比如Product的唯一名称为[Product]或Product。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[属性]是维度的基本构造块。 维度包含一组在属性关系基础上组织而成的属性。具有对外关系的任何属性必须具有与其相关属性关联的唯一键。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;级别（Level）:级别的UniqueName为[维度名称].[级别名称]，如[year].[2001]，同样，如果没有空格，[]可以省略，如year.[2001]。&lt;/li&gt;
+&lt;li&gt;成员（Member）:成员的UniqueName格式为[维度].(Parent  Member  UniqueName).[Member Name],如：时间维上的2003年2月份的UniqueName为[2003].[1].[2]，中间的1为1季度，因为该维度的结构为年、季、月。&lt;/li&gt;
+&lt;li&gt;度量（Measure）:度量实际上是属于维度维的成员，也就是说度量（Measure）是任何Cube的一个维度。如：度量Unit Sales的UnqiueName为[Measures].[Unit Sales]&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;元组、集合&quot;&gt;元组、集合&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;元组用于定义来自多维数据切片；他是由一个或多个维度的单个成员的有序集合组成。元组内不包含来自同一个维度的多个成员（可以理解为坐标），元组用（）包围。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;p&gt;（时间.[下半年]）&lt;/p&gt;
+&lt;p&gt;（时间.[下半年],[产品].[手机].[Nokia]）&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;集合（Set）是零个、一个或多个元组的有序集合。集合最常用于在Mdx查询中定义轴维度和切片器维度，并且同样可能只具有单个元组或可能在某些情况下为空。在Mdx语法中，元组用花括号{}来构造集合&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;举例，下面是具有两个元组的集合：&lt;/p&gt;
+&lt;p&gt;{（时间.[上半年],路线.非陆地.航空），（时间.[下半年]，路线.非陆地.海路）}&lt;/p&gt;
+&lt;p&gt;一个集合可包含同一个元组不止一次的出现。这样也是可以的：&lt;/p&gt;
+&lt;p&gt;{时间.[下半年],时间.[下半年]}&lt;/p&gt;
+&lt;p&gt;集合值以元组表示的一组成员组合，或指集合中的元组所代表的单元中的值，视集合使用的上下文而定。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：单个元组的集合不等于元组。如{时间.[下半年]}不等于  时间.[下半年]。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&quot;Mdx基本语法结构&quot;&gt;Mdx基本语法结构&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;    SELECT  [axis specification] ON COLUMNS,
+
+                [axis specification] ON ROWS
+
+   FROM
+
+                [cube name]
+
+   WHERE
+
+              [silcer specification]&lt;/code&gt;&lt;/pre&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;[axis specification]可以看成是轴的成员选择。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;[silcer specification]表示切片上的成员，可以看成过滤信息，[silcer specification]可选，如果没有指定，取系统默认的维度成员作为切片&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;轴维度和切片器维度&quot;&gt;轴维度和切片器维度&lt;/h2&gt;
+&lt;p&gt;当设计多维表达式（Mdx）查询时，应用程序一般查看多维数据集并将维度集合划分为两个子集：&lt;/p&gt;
+&lt;p&gt;1.查询轴 - 从此层次结构集中检索多个成员的数据。&lt;/p&gt;
+&lt;p&gt;2.切片器轴 - 从此层次结构集中检索单个成员的数据。&lt;/p&gt;            </description>
+            <pubDate>2016-07-05 14:51:27</pubDate>
+            <link>http://sikisama.github.io/blog/mdx.html</link>
+            <guid isPermaLink="true">http://sikisama.github.io/blog/mdx.html</guid>
+                                               <category>study</category>
+                                    </item>
                 <item>
             <title>正则表达式与preg函数</title>
             <description>
@@ -15,9 +88,9 @@ author: zhangxuefeng
 date: 2016-06-27
 title: 正则表达式与preg函数
 tags: 正则表达式
-category: 正则表达式
+category: study
 status: publish
-summary: 总结一些git常用的命令
+summary: 正则规范
 --&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.noupe.com/development/php-regular-expressions.html&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
 &lt;table&gt;
@@ -170,7 +243,7 @@ summary: 总结一些git常用的命令
             <pubDate>2016-08-05 11:00:48</pubDate>
             <link>http://sikisama.github.io/blog/reg_express.html</link>
             <guid isPermaLink="true">http://sikisama.github.io/blog/reg_express.html</guid>
-                                               <category>正则表达式</category>
+                                               <category>study</category>
                                     </item>
                 <item>
             <title>Git使用指南</title>
@@ -180,7 +253,7 @@ author: zhangxuefeng
 date: 2016-06-07
 title: Git使用指南
 tags: Git
-category: Git
+category:study
 status: publish
 summary: 总结一些git常用的命令
 --&gt;
@@ -278,7 +351,7 @@ git tag -a [v] [sha]&lt;/code&gt;&lt;/pre&gt;
             <pubDate>2016-08-05 11:12:07</pubDate>
             <link>http://sikisama.github.io/blog/git_instruction_manual.html</link>
             <guid isPermaLink="true">http://sikisama.github.io/blog/git_instruction_manual.html</guid>
-                                               <category>Git</category>
+                                               <category>study</category>
                                     </item>
             </channel>
 </rss>

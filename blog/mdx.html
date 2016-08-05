@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Git使用指南|sikisama的博客</title>
-	<meta name="keywords" content="Git,study,sikisama的博客">
-	<meta name="description" content="总结一些git常用的命令">
+	<title>mdx重要概念|sikisama的博客</title>
+	<meta name="keywords" content="mdx,study,sikisama的博客">
+	<meta name="description" content="mdx重要概念">
 	
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
@@ -37,113 +37,78 @@
 					<div id="main" class="site-main" role="main">
 						<article class="post hentry">
 	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/git_instruction_manual.html" rel="bookmark">Git使用指南</a></h1>
+	<h1 class="post-title"><a href="/blog/mdx.html" rel="bookmark">mdx重要概念</a></h1>
 	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-06-07</time>
+		<time class="post-date"><i class="fa fa-clock-o"></i>2016-07-07</time>
 				<span class="seperator">/</span>
 	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
 	    	</div><!-- .entry-meta -->
 </header><!-- .entry-header -->	<div class="entry-content">
 		<!--
 author: zhangxuefeng
-date: 2016-06-07
-title: Git使用指南
-tags: Git
-category:study
+date: 2016-07-07
+title: mdx重要概念
+tags: mdx
+category: study
 status: publish
-summary: 总结一些git常用的命令
+summary: mdx重要概念
 -->
-<h2 id="一.创建与添加">一.创建与添加</h2>
-<pre><code>1.git init //将一个目录初始化为git仓库</code></pre>
-<p>建立一个空的仓库，目录下会多一个.git的隐藏文件夹，用来跟踪管理版本库。</p>
-<pre><code>2.git add //添加文件到缓存</code></pre>
-<p>将文件添加至缓存，多个文件用空格分隔</p>
-<p><strong>git add .</strong> 或 <strong>git add  *</strong> 可以递归的添加当前目录的所有文件</p>
-<pre><code>3.git commit -m 'comments' //记录缓存内容的快照</code></pre>
-<p>将（已缓存的/已add的）文件提交到仓库，生成快照</p>
-<pre><code>4.git commit -a </code></pre>
-<p>自动将在提交前已记录、修改的文件放入缓存区(跳过add)</p>
-<pre><code>5.git clone [url] [new_name] //复制一个Git仓库
-eg. git clone https://github.com/sikisama/sikisama.github.io
-or
-git clone git://github.com/sikisama/sikisama.github.io</code></pre>
-<h2 id="二、查看与修改">二、查看与修改</h2>
-<pre><code>1.git status / git status -s //查看工作目录与缓存状态</code></pre>
-<p>查看代码在缓存与当前工作目录的状态。带-s参数显示简短的结果，第一栏是缓存（add之后），第二栏是工作目录（add之前）。</p>
-<p>用于查看上一次提交之后(commit)有什么被修改或临时提交的（add）。</p>
-<pre><code>2.git diff  //尚未缓存的改动</code></pre>
-<p>显示上次提交快照（commit）之后尚未缓存(add)的所有修改。</p>
 <blockquote>
-<p>执行完git status 再跑一下 git diff 是好习惯</p>
+<p>Mdx为多维数据库提供了表达式语查询语法，用于cube数据，并提供了许多强大的分析函数，用于支持常用的OLAP分析。</p>
 </blockquote>
-<pre><code>3.git diff --cached   //已缓存的改动</code></pre>
-<p>显示接下来将要写入快照的内容（after add before commit ）</p>
-<pre><code>4.git diff HEAD</code></pre>
-<p>查看已缓存与未缓存的改动，也就是工作目录与上一次提交(commit)的更新区别，无视缓存。</p>
-<pre><code>5.git diff --stat //显示摘要</code></pre>
-<p>显示摘要而非整个diff</p>
-<pre><code>6.git reset HEAD -- file //已缓存与未缓存的改动</code></pre>
-<p><strong>取消</strong>已经缓存（add）的内容，将缓存区恢复到做出修改之前的样子。</p>
-<pre><code>//回退到之前的若干个版本(commit)
-git reset --hard HEAD^/HEAD~[n]
-git reset --hard [commit_id]
-
-7.git rm </code></pre>
-<p>将文件从缓存区<strong>移除</strong>，如果要在目录中保留，使用</p>
-<pre><code>git rm --cached
-
-8.git mv  //git rm --cached orig;mv orig new;git add new</code></pre>
-<h2 id="三、远程仓库">三、远程仓库</h2>
+<h2 id="语法">语法</h2>
 <blockquote>
-<p>使用 git fetch 更新你的项目，使用 git push 分享你的改动。 你可以用 git remote 管理你的远程仓库。</p>
+<p>维度、级别、成员等，一般用唯一名称UniqueName来标示，可以用[]包围name,如果name有空格或者数字开头，必须使用[],否则可以忽略。UniqueName是根据层次结构表示的一种方法。即递归显示出祖先的名称。</p>
 </blockquote>
-<pre><code>1.git remote /git remote -v //罗列添加和删除远端仓库的别名</code></pre>
-<p>当你需要与远端仓库同步的时候，不需要使用它详细的链接。Git 储存了你感兴趣的远端仓库的链接的别名或者昵称。</p>
-<pre><code>2.git remote add [alias] [url]//为项目添加一个远程仓库
-
-3.git remote rm [alias] //删除现存的某个别名
-
-4.git fetch //从远端下载新分支与数据</code></pre>
-<p>想要同步远端信息，首先 git fetch [alias] 告诉git去获取数据，然后执行 git merge [alias]/[branch]</p>
-<pre><code>5.git pull //从远端仓库提取数据并尝试合并到当前分支,在git fetch 后 git merge 
-
-6.git push [alias] [branch]//推送你的新分支到某个远端仓库</code></pre>
-<p>会将你的[branch]分支推送成[alias]远端上的[branch]分支。</p>
+<ol>
+<li>
+<p>维度（Dimension):维度直接用[]包围。比如Product的唯一名称为[Product]或Product。</p>
 <blockquote>
-<p>git push [alias] [branch] 将你的本地改动推送到远端仓库。 如果可以的话，它会依据你的 [branch] 的样子，推送到远端的 [branch] 去。 如果在你上次提取、合并之后，另有人推送了，Git 服务器会拒绝你的推送，知道你是最新的为止。</p>
+<p>[属性]是维度的基本构造块。 维度包含一组在属性关系基础上组织而成的属性。具有对外关系的任何属性必须具有与其相关属性关联的唯一键。</p>
 </blockquote>
-<p><strong>修正这个问题:执行 git fetch github; git merge github/master，然后再推送。</strong></p>
-<h2 id="四、分支与合并">四、分支与合并</h2>
+</li>
+<li>级别（Level）:级别的UniqueName为[维度名称].[级别名称]，如[year].[2001]，同样，如果没有空格，[]可以省略，如year.[2001]。</li>
+<li>成员（Member）:成员的UniqueName格式为[维度].(Parent  Member  UniqueName).[Member Name],如：时间维上的2003年2月份的UniqueName为[2003].[1].[2]，中间的1为1季度，因为该维度的结构为年、季、月。</li>
+<li>度量（Measure）:度量实际上是属于维度维的成员，也就是说度量（Measure）是任何Cube的一个维度。如：度量Unit Sales的UnqiueName为[Measures].[Unit Sales]</li>
+</ol>
+<h4 id="元组、集合">元组、集合</h4>
 <blockquote>
-<p>执行 git branch [branchname] 来创建分支，用 git checkout [branchname] 命令切换到该分支。当切换分支的时候，git会用该分支最后提交的快照来替换工作目录的内容。使用 git merge 来合并分支。</p>
+<p>元组用于定义来自多维数据切片；他是由一个或多个维度的单个成员的有序集合组成。元组内不包含来自同一个维度的多个成员（可以理解为坐标），元组用（）包围。</p>
 </blockquote>
-<pre><code>1.git branch //列出、创建与管理工作上下文
+<p>如：</p>
+<p>（时间.[下半年]）</p>
+<p>（时间.[下半年],[产品].[手机].[Nokia]）</p>
+<blockquote>
+<p>集合（Set）是零个、一个或多个元组的有序集合。集合最常用于在Mdx查询中定义轴维度和切片器维度，并且同样可能只具有单个元组或可能在某些情况下为空。在Mdx语法中，元组用花括号{}来构造集合</p>
+</blockquote>
+<p>举例，下面是具有两个元组的集合：</p>
+<p>{（时间.[上半年],路线.非陆地.航空），（时间.[下半年]，路线.非陆地.海路）}</p>
+<p>一个集合可包含同一个元组不止一次的出现。这样也是可以的：</p>
+<p>{时间.[下半年],时间.[下半年]}</p>
+<p>集合值以元组表示的一组成员组合，或指集合中的元组所代表的单元中的值，视集合使用的上下文而定。</p>
+<p><strong>注意：单个元组的集合不等于元组。如{时间.[下半年]}不等于  时间.[下半年]。</strong></p>
+<h4 id="Mdx基本语法结构">Mdx基本语法结构</h4>
+<pre><code>    SELECT  [axis specification] ON COLUMNS,
 
-2.git checkout [branchname] //切换到新的分支上下文
+                [axis specification] ON ROWS
 
-3.git branch [branchname] //切换到新的分支上下文</code></pre>
-<p>git将还原你的工作目录到你创建分支时的样子——可以把它看做一个记录你当前进度的书签。    </p>
-<pre><code>4.git checkout -b [branchname] //创建新分支并立即切换到它
+   FROM
 
-5.git branch -d [branchname] //删除分支
+                [cube name]
 
-6.git merge [branchname] //将分支合并到当前分支</code></pre>
-<p><strong>合并冲突</strong>
-不同分支修改了相同区块的代码，就会出现冲突。使用git diff 可以显示冲突的双方和冲突解决的方法。使用git add告诉git文件中的冲突已经解决。</p>
-<pre><code>7.git log //显示一个分支中提交的更改记录
+   WHERE
 
-8.git log --online //查看紧凑简介的版本，--graph 选项查看历史中出现的分支和合并
-
-9.git log --online master ^dev //在不想看到的分支前放一个 ^
-
-10.git tag //给历史记录中某个重要的一点打上标签
-
-git tag -a [v] [sha]</code></pre>
-<p>参考资料</p>
-<ul>
-<li><a href="http://codeigniter.org.cn/">git参考手册</a></li>
-<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">git教程</a></li>
-</ul>
+              [silcer specification]</code></pre>
+<ol>
+<li>
+<p>[axis specification]可以看成是轴的成员选择。</p>
+</li>
+<li>[silcer specification]表示切片上的成员，可以看成过滤信息，[silcer specification]可选，如果没有指定，取系统默认的维度成员作为切片</li>
+</ol>
+<h2 id="轴维度和切片器维度">轴维度和切片器维度</h2>
+<p>当设计多维表达式（Mdx）查询时，应用程序一般查看多维数据集并将维度集合划分为两个子集：</p>
+<p>1.查询轴 - 从此层次结构集中检索多个成员的数据。</p>
+<p>2.切片器轴 - 从此层次结构集中检索单个成员的数据。</p>
 	</div><!-- .entry-content -->	<footer class="entry-footer">
 		<ul class="post-categories">
           
@@ -151,13 +116,13 @@ git tag -a [v] [sha]</code></pre>
         	</ul>
 		
 		<ul class="post-tags">
-                   <li><a href="/tags/1141897447.html" rel="tag">Git</a></li>
+                   <li><a href="/tags/887333414.html" rel="tag">mdx</a></li>
         	</ul>
 		
 	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
 	<div id="respond" class="comment-respond">
 		<!-- 多说评论框 start -->
-		<div class="ds-thread" data-thread-key="75a2115bf5eee84eea6f162873f4ed05" data-title="Git使用指南" data-url="http://sikisama.github.io/blog/git_instruction_manual.html"></div>
+		<div class="ds-thread" data-thread-key="ccd41a6c737f617d825ec9e5773cd8b4" data-title="mdx重要概念" data-url="http://sikisama.github.io/blog/mdx.html"></div>
 		<!-- 多说评论框 end -->
 		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 		<script type="text/javascript">
