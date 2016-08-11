@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>nodejs入门|sikisama的博客</title>
+	<meta name="keywords" content="nodejs,javascript,sikisama的博客">
+	<meta name="description" content="nodejs经典入门">
+	
+	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
+	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
+	<link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext">
+	<link rel="stylesheet" href="/theme/quest/css/style.css?ver=2.2" type="text/css" media="all" />
+	<link rel="stylesheet" href="/theme/quest/css/customizer.css?ver=2.2" type="text/css" media="all" />
+	<link rel="alternate" type="application/rss+xml" title="sikisama的博客" href="http://sikisama.github.io/feed.xml" />
+	
+	</head>
+
+<body class="home blog wide">
+	<div id="page" class="hfeed site">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		    <header id="masthead" class="main-header" role="banner">
+<div class="container">
+	<div class="row">
+		<div class="site-branding col-md-4">
+			<h1 class="site-title"><a href="http://sikisama.github.io" rel="home">sikisama的博客</a></h1>
+				<span class="site-description">知行合一</span>
+		</div>
+		<!-- .site-branding -->
+	</div>
+</div>
+</header>		    <div id="content">
+	<div class="quest-row site-content">
+		<div class="container">
+			<div class="row">
+				<div id="primary" class="content-area single col-md-9">
+					<div id="main" class="site-main" role="main">
+						<article class="post hentry">
+	<header class="entry-header">
+	<h1 class="post-title"><a href="/blog/nodejs_guide.html" rel="bookmark">nodejs入门</a></h1>
+	<div class="entry-meta">
+		<time class="post-date"><i class="fa fa-clock-o"></i>2016-08-11</time>
+				<span class="seperator">/</span>
+	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
+	    	</div><!-- .entry-meta -->
+</header><!-- .entry-header -->	<div class="entry-content">
+		<!--
+author: zhangxuefeng
+date: 2016-08-11
+title: nodejs入门
+tags: nodejs
+category:javascript
+status: publish
+summary: nodejs经典入门
+-->
+<p><a href="http://www.nodebeginner.org/index-zh-cn.html">原文链接</a></p>
+<h2 id="服务端JavaScript">服务端JavaScript</h2>
+<blockquote>
+<p>JavaScript最早是运行在浏览器中，然而浏览器只是提供了一个上下文，它定义了使用JavaScript可以做什么，但并没有“说”太多关于JavaScript语言本身可以做什么。</p>
+</blockquote>
+<p>事实上，JavaScript是一门“完整”的语言：</p>
+<p>它可以使用在不同的上下文中，其能力与其他同类语言相比有过之而无不及。
+Node.js事实上就是另外一种上下文，它允许在后端（脱离浏览器环境）运行JavaScript代码。</p>
+<p>要实现在后台运行JavaScript代码，代码需要先被解释然后正确的执行。Node.js的原理正是如此，它使用了Google的V8虚拟机（Google的Chrome浏览器使用的JavaScript执行环境），来解释和执行JavaScript代码。</p>
+<p>除此之外，伴随着Node.js的还有许多有用的模块，它们可以简化很多重复的劳作，比如向终端输出字符串。</p>
+<p>因此，Node.js事实上既是一个运行时环境，同时又是一个库。</p>
+<h2 id="分析HTTP服务器">分析HTTP服务器</h2>
+<blockquote>
+<p>Node.js是事件驱动的</p>
+</blockquote>
+<p>我们创建了服务器，并且向创建它的方法传递了一个函数。无论何时我们的服务器收到一个请求，这个函数就会被调用。</p>
+<p>这个就是传说中的 回调 。我们给某个方法传递了一个函数，这个方法在有相应事件发生时调用这个函数来进行 回调 。</p>
+<pre><code>var http = require("http");
+http.createServer(function(request,response){
+  response.writeHead(200,{"Content-Type":"text/plain"});
+  response.write("Hello World");
+  response.end();
+}).listen(8888);</code></pre>
+<h2 id="如何来进行请求的“路由”">如何来进行请求的“路由”</h2>
+<p>我们需要的所有数据都会包含在request对象中，该对象作为onRequest()回调函数的第一个参数传递。但是为了解析这些数据，我们需要额外的Node.JS模块，它们分别是url和querystring模块。</p>
+<pre><code> url.parse(string).query
+                                           |
+           url.parse(string).pathname      |
+                       |                   |
+                       |                   |
+                     ------ -------------------
+http://localhost:8888/start?foo=bar&amp;hello=world
+                                ---       -----
+                                 |          |
+                                 |          |
+              querystring(string)["foo"]    |
+                                            |
+                         querystring(string)["hello"]</code></pre>
+<p>现在我们来给onRequest()函数加上一些逻辑，用来找出浏览器请求的URL路径：</p>
+<pre><code>var http = require("http");
+var url = require("url");
+
+function start() {
+  function onRequest(request, response) {
+    var pathname = url.parse(request.url).pathname;
+    console.log("Request for " + pathname + " received.");
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello World");
+    response.end();
+  }
+
+  http.createServer(onRequest).listen(8888);
+  console.log("Server has started.");
+}
+
+exports.start = start;</code></pre>
+<p><strong>使用依赖注入的方式较松散地添加路由模块</strong></p>
+<p>建立一个名为router.js的文件</p>
+<pre><code>function route(pathname) {
+  console.log("About to route a request for " + pathname);
+}
+
+exports.route = route;</code></pre>
+<p>扩展start函数</p>
+<pre><code>var http = require("http");
+var url = require("url");
+
+function start(route) {
+  function onRequest(request, response) {
+    var pathname = url.parse(request.url).pathname;
+    console.log("Request for " + pathname + " received.");
+
+    route(pathname);
+
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello World");
+    response.end();
+  }
+
+  http.createServer(onRequest).listen(8888);
+  console.log("Server has started.");
+}
+
+exports.start = start;</code></pre>
+<p>更新index.js</p>
+<pre><code>var server = require("./server");
+var router = require("./router");
+
+server.start(router.route);</code></pre>
+<h2 id="行为驱动执行">行为驱动执行</h2>
+<p>将函数作为参数传递并不仅仅出于技术上的考量。对软件设计来说，这其实是个哲学问题。想想这样的场景：在index文件中，我们可以将router对象传递进去，服务器随后可以调用这个对象的route函数。</p>
+<p>就像这样，我们传递一个东西，然后服务器利用这个东西来完成一些事。嗨那个叫路由的东西，能帮我把这个路由一下吗？</p>
+<p>但是服务器其实不需要这样的东西。它只需要把事情做完就行，其实为了把事情做完，你根本不需要东西，你需要的是动作。<strong>也就是说，你不需要名词，你需要动词。</strong></p>
+<p>理解了这个概念里最核心、最基本的思想转换后，我自然而然地理解了函数编程。</p>
+<p>我是在读了Steve Yegge的大作<a href="http://steve-yegge.blogspot.sg/2006/03/execution-in-kingdom-of-nouns.html">名词王国中的死刑</a>之后理解函数编程。</p>
+<h2 id="路由给真正的请求处理程序">路由给真正的请求处理程序</h2>
+<blockquote>
+<p>在C++或C#中，当我们谈到对象，指的是类或者结构体的实例。对象根据他们实例化的模板（就是所谓的类），会拥有不同的属性和方法。但在JavaScript里对象不是这个概念。在JavaScript中，对象就是一个键/值对的集合 -- 你可以把JavaScript的对象想象成一个键为字符串类型的字典。</p>
+</blockquote>
+<p>但如果JavaScript的对象仅仅是键/值对的集合，它又怎么会拥有方法呢？好吧，这里的值可以是字符串、数字或者……函数！</p>
+<p>我们先将这个对象引入到主文件index.js中：</p>
+<pre><code>var server = require("./server");
+var router = require("./router");
+var requestHandlers = require("./requestHandlers");
+
+var handle = {}
+handle["/"] = requestHandlers.start;
+handle["/start"] = requestHandlers.start;
+handle["/upload"] = requestHandlers.upload;
+
+server.start(router.route, handle);</code></pre>
+<p>虽然handle并不仅仅是一个“东西”（一些请求处理程序的集合），我还是建议以一个动词作为其命名，这样做可以让我们在路由中使用更流畅的表达式\</p>
+<p>在完成了对象的定义后，我们把它作为额外的参数传递给服务器，为此将server.js修改如下</p>
+<pre><code>var http = require("http");
+var url = require("url");
+
+function start(route, handle) {
+  function onRequest(request, response) {
+    var pathname = url.parse(request.url).pathname;
+    console.log("Request for " + pathname + " received.");
+
+    route(handle, pathname);
+
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello World");
+    response.end();
+  }
+
+  http.createServer(onRequest).listen(8888);
+  console.log("Server has started.");
+}
+
+exports.start = start;</code></pre>
+<p>相应地在route.js文件中修改route()函数</p>
+<pre><code>function route(handle, pathname) {
+  console.log("About to route a request for " + pathname);
+  if (typeof handle[pathname] === 'function') {
+    handle[pathname]();
+  } else {
+    console.log("No request handler found for " + pathname);
+  }
+}
+
+exports.route = route;</code></pre>
+<p>通过以上代码，我们首先检查给定的路径对应的请求处理程序是否存在，如果存在的话直接调用相应的函数。我们可以用从关联数组中获取元素一样的方式从传递的对象中获取请求处理函数，因此就有了简洁流畅的形如handle[pathname]();的表达式，这个感觉就像在前方中提到的那样：“嗨，请帮我处理了这个路径”。</p>
+<h2 id="阻塞与非阻塞">阻塞与非阻塞</h2>
+<blockquote>
+<p>在node中除了代码，所有一切都是并行执行的</p>
+</blockquote>
+<p>Node.js可以在不新增额外线程的情况下，依然可以对任务进行并行处理 —— Node.js是单线程的。它通过事件轮询（event loop）来实现并行操作，对此，我们应该要充分利用这一点 —— 尽可能的避免阻塞操作，取而代之，多使用非阻塞操作。</p>
+<p>对于Node.js来说，它是这样处理的：“嘿，probablyExpensiveFunction()（这里指的就是需要花时间处理的函数），你继续处理你的事情，我（Node.js线程）先不等你了，我继续去处理你后面的代码，请你提供一个callbackFunction()，等你处理完之后我会去调用该回调函数的，谢谢！”</p>
+<h2 id="以非阻塞操作进行请求响应">以非阻塞操作进行请求响应</h2>
+<p>相对采用将内容传递给服务器的方式，我们这次采用将服务器“传递”给内容的方式。 从实践角度来说，就是将response对象（从服务器的回调函数onRequest()获取）通过请求路由传递给请求处理程序。 随后，处理程序就可以采用该对象上的函数来对请求作出响应。</p>
+<h2 id="处理POST请求">处理POST请求</h2>
+<p>考虑这样一个简单的例子：我们显示一个文本区（textarea）供用户输入内容，然后通过POST请求提交给服务器。最后，服务器接受到请求，通过处理程序将输入的内容展示到浏览器中。</p>
+<p>/start请求处理程序用于生成带文本区的表单，因此，我们将requestHandlers.js修改为如下形式：</p>
+<pre><code>function start(response) {
+  console.log("Request handler 'start' was called.");
+
+  var body = '&lt;html&gt;'+
+    '&lt;head&gt;'+
+    '&lt;meta http-equiv="Content-Type" content="text/html; '+
+    'charset=UTF-8" /&gt;'+
+    '&lt;/head&gt;'+
+    '&lt;body&gt;'+
+    '&lt;form action="/upload" method="post"&gt;'+
+    '&lt;textarea name="text" rows="20" cols="60"&gt;&lt;/textarea&gt;'+
+    '&lt;input type="submit" value="Submit text" /&gt;'+
+    '&lt;/form&gt;'+
+    '&lt;/body&gt;'+
+    '&lt;/html&gt;';
+
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(body);
+    response.end();
+}
+
+function upload(response) {
+  console.log("Request handler 'upload' was called.");
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("Hello Upload");
+  response.end();
+}
+
+exports.start = start;
+exports.upload = upload;</code></pre>
+<p>为了使整个过程非阻塞，Node.js会将POST数据拆分成很多小的数据块，然后通过触发特定的事件，将这些小数据块传递给回调函数。这里的特定的事件有data事件（表示新的小数据块到达了）以及end事件（表示所有的数据都已经接收完毕）。</p>
+<p>我们需要告诉Node.js当这些事件触发的时候，回调哪些函数。怎么告诉呢？ 我们通过在request对象上注册监听器（listener） 来实现。这里的request对象是每次接收到HTTP请求时候，都会把该对象传递给onRequest回调函数。</p>
+<p>如下所示：</p>
+<pre><code>request.addListener("data", function(chunk) {
+  // called when a new chunk of data was received
+});
+
+request.addListener("end", function() {
+  // called when all chunks of data have been received
+});</code></pre>
+<p>将data和end事件的回调函数直接放在服务器中，在data事件回调中收集所有的POST数据，当接收到所有数据，触发end事件后，其回调函数调用请求路由，并将数据传递给它，然后，请求路由再将该数据传递给请求处理程序。</p>
+<pre><code>var http = require("http");
+var url = require("url");
+
+function start(route, handle) {
+  function onRequest(request, response) {
+    var postData = "";
+    var pathname = url.parse(request.url).pathname;
+    console.log("Request for " + pathname + " received.");
+
+    request.setEncoding("utf8");
+
+    request.addListener("data", function(postDataChunk) {
+      postData += postDataChunk;
+      console.log("Received POST data chunk '"+
+      postDataChunk + "'.");
+    });
+
+    request.addListener("end", function() {
+      route(handle, pathname, response, postData);
+    });
+
+  }
+
+  http.createServer(onRequest).listen(8888);
+  console.log("Server has started.");
+}
+
+exports.start = start;</code></pre>
+<p>我们接下来在/upload页面，展示用户输入的内容。要实现该功能，我们需要将postData传递给请求处理程序，修改router.js为如下形式：</p>
+<pre><code>function route(handle, pathname, response, postData) {
+  console.log("About to route a request for " + pathname);
+  if (typeof handle[pathname] === 'function') {
+    handle[pathname](response, postData);
+  } else {
+    console.log("No request handler found for " + pathname);
+    response.writeHead(404, {"Content-Type": "text/plain"});
+    response.write("404 Not found");
+    response.end();
+  }
+}
+
+exports.route = route;</code></pre>
+<p>然后，在requestHandlers.js中，我们将数据包含在对upload请求的响应中：</p>
+<pre><code>function start(response, postData) {
+  console.log("Request handler start was called.");
+
+  var body = '&lt;html&gt;'+
+    '&lt;head&gt;'+
+    '&lt;meta http-equiv="Content-Type" content="text/html; '+
+    'charset=UTF-8" /&gt;'+
+    '&lt;/head&gt;'+
+    '&lt;body&gt;'+
+    '&lt;form action="/upload" method="post"&gt;'+
+    '&lt;textarea name="text" rows="20" cols="60"&gt;&lt;/textarea&gt;'+
+    '&lt;input type="submit" value="Submit text" /&gt;'+
+    '&lt;/form&gt;'+
+    '&lt;/body&gt;'+
+    '&lt;/html&gt;';
+
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(body);
+    response.end();
+}
+
+function upload(response, postData) {
+  console.log("Request handler upload was called.");
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  //querystring.parse(postData).text;
+  response.write("You've sent: " + postData);
+  response.end();
+}
+
+exports.start = start;
+exports.upload = upload;
+</code></pre>
+<h2 id="处理文件上传">处理文件上传</h2>
+<p>这里我们要用到的外部模块是Felix Geisendörfer开发的node-formidable模块。它对解析上传的文件数据做了很好的抽象。</p>
+<p>Node.js有它自己的包管理器，叫NPM。它可以让安装Node.js的外部模块变得非常方便。通过如下一条命令就可以完成该模块的安装：</p>
+<pre><code>npm install formidable</code></pre>
+<p>我们来添加/showURL的请求处理程序，该处理程序直接硬编码将文件/tmp/test.png内容展示到浏览器中。将requestHandlers.js修改为如下形式：</p>
+<pre><code>var querystring = require("querystring"),
+    fs = require("fs");
+
+function start(response, postData) {
+  console.log("Request handler 'start' was called.");
+
+  var body = '&lt;html&gt;'+
+    '&lt;head&gt;'+
+    '&lt;meta http-equiv="Content-Type" '+
+    'content="text/html; charset=UTF-8" /&gt;'+
+    '&lt;/head&gt;'+
+    '&lt;body&gt;'+
+    '&lt;form action="/upload" method="post"&gt;'+
+    '&lt;textarea name="text" rows="20" cols="60"&gt;&lt;/textarea&gt;'+
+    '&lt;input type="submit" value="Submit text" /&gt;'+
+    '&lt;/form&gt;'+
+    '&lt;/body&gt;'+
+    '&lt;/html&gt;';
+
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(body);
+    response.end();
+}
+
+function upload(response, postData) {
+  console.log("Request handler 'upload' was called.");
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("You've sent the text: "+
+  querystring.parse(postData).text);
+  response.end();
+}
+
+function show(response, postData) {
+  console.log("Request handler 'show' was called.");
+  fs.readFile("/tmp/test.png", "binary", function(error, file) {
+    if(error) {
+      response.writeHead(500, {"Content-Type": "text/plain"});
+      response.write(error + "\n");
+      response.end();
+    } else {
+      response.writeHead(200, {"Content-Type": "image/png"});
+      response.write(file, "binary");
+      response.end();
+    }
+  });
+}
+
+exports.start = start;
+exports.upload = upload;
+exports.show = show;</code></pre>
+<p>好，最后我们要的就是：</p>
+<ul>
+<li>在/start表单中添加一个文件上传元素</li>
+<li>将node-formidable整合到我们的upload请求处理程序中，用于将上传的图片保存到/tmp/test.png</li>
+<li>将上传的图片内嵌到/uploadURL输出的HTML中</li>
+</ul>
+<p>第一项很简单。只需要在HTML表单中，添加一个multipart/form-data的编码类型，移除此前的文本区，添加一个文件上传组件，并将提交按钮的文案改为“Upload file”即可。 如下requestHandler.js所示：</p>
+<pre><code>var querystring = require("querystring"),
+    fs = require("fs");
+
+function start(response, postData) {
+  console.log("Request handler 'start' was called.");
+
+  var body = '&lt;html&gt;'+
+    '&lt;head&gt;'+
+    '&lt;meta http-equiv="Content-Type" '+
+    'content="text/html; charset=UTF-8" /&gt;'+
+    '&lt;/head&gt;'+
+    '&lt;body&gt;'+
+    '&lt;form action="/upload" enctype="multipart/form-data" '+
+    'method="post"&gt;'+
+    '&lt;input type="file" name="upload"&gt;'+
+    '&lt;input type="submit" value="Upload file" /&gt;'+
+    '&lt;/form&gt;'+
+    '&lt;/body&gt;'+
+    '&lt;/html&gt;';
+
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(body);
+    response.end();
+}
+
+function upload(response, postData) {
+  console.log("Request handler 'upload' was called.");
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("You've sent the text: "+
+  querystring.parse(postData).text);
+  response.end();
+}
+
+function show(response, postData) {
+  console.log("Request handler 'show' was called.");
+  fs.readFile("/tmp/test.png", "binary", function(error, file) {
+    if(error) {
+      response.writeHead(500, {"Content-Type": "text/plain"});
+      response.write(error + "\n");
+      response.end();
+    } else {
+      response.writeHead(200, {"Content-Type": "image/png"});
+      response.write(file, "binary");
+      response.end();
+    }
+  });
+}
+
+exports.start = start;
+exports.upload = upload;
+exports.show = show;</code></pre>
+<p>下一步相对比较复杂。这里有这样一个问题： 我们需要在upload处理程序中对上传的文件进行处理，这样的话，我们就需要将request对象传递给node-formidable的form.parse函数。</p>
+<p>但是，我们有的只是response对象和postData数组。看样子，我们只能不得不将request对象从服务器开始一路通过请求路由，再传递给请求处理程序。 或许还有更好的方案，但是，不管怎么说，目前这样做可以满足我们的需求。</p>
+<p>我们从server.js开始 —— 移除对postData的处理以及request.setEncoding （这部分node-formidable自身会处理），转而采用将request对象传递给请求路由的方式：</p>
+<pre><code>var http = require("http");
+var url = require("url");
+
+function start(route, handle) {
+  function onRequest(request, response) {
+    var pathname = url.parse(request.url).pathname;
+    console.log("Request for " + pathname + " received.");
+    route(handle, pathname, response, request);
+  }
+
+  http.createServer(onRequest).listen(8888);
+  console.log("Server has started.");
+}
+
+exports.start = start;</code></pre>
+<p>接下来是 router.js —— 我们不再需要传递postData了，这次要传递request对象：</p>
+<pre><code>function route(handle, pathname, response, request) {
+  console.log("About to route a request for " + pathname);
+  if (typeof handle[pathname] === 'function') {
+    handle[pathname](response, request);
+  } else {
+    console.log("No request handler found for " + pathname);
+    response.writeHead(404, {"Content-Type": "text/html"});
+    response.write("404 Not found");
+    response.end();
+  }
+}
+
+exports.route = route;</code></pre>
+<p>接下来，我们把处理文件上传以及重命名的操作放到一起，如下requestHandlers.js所示：</p>
+<pre><code>var querystring = require("querystring"),
+    fs = require("fs"),
+    formidable = require("formidable");
+
+function start(response) {
+  console.log("Request handler 'start' was called.");
+
+  var body = '&lt;html&gt;'+
+    '&lt;head&gt;'+
+    '&lt;meta http-equiv="Content-Type" content="text/html; '+
+    'charset=UTF-8" /&gt;'+
+    '&lt;/head&gt;'+
+    '&lt;body&gt;'+
+    '&lt;form action="/upload" enctype="multipart/form-data" '+
+    'method="post"&gt;'+
+    '&lt;input type="file" name="upload" multiple="multiple"&gt;'+
+    '&lt;input type="submit" value="Upload file" /&gt;'+
+    '&lt;/form&gt;'+
+    '&lt;/body&gt;'+
+    '&lt;/html&gt;';
+
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(body);
+    response.end();
+}
+
+function upload(response, request) {
+  console.log("Request handler 'upload' was called.");
+
+  var form = new formidable.IncomingForm();
+  console.log("about to parse");
+  form.parse(request, function(error, fields, files) {
+    console.log("parsing done");
+    fs.renameSync(files.upload.path, "/tmp/test.png");
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write("received image:&lt;br/&gt;");
+    response.write("&lt;img src='/show' /&gt;");
+    response.end();
+  });
+}
+
+function show(response) {
+  console.log("Request handler 'show' was called.");
+  fs.readFile("/tmp/test.png", "binary", function(error, file) {
+    if(error) {
+      response.writeHead(500, {"Content-Type": "text/plain"});
+      response.write(error + "\n");
+      response.end();
+    } else {
+      response.writeHead(200, {"Content-Type": "image/png"});
+      response.write(file, "binary");
+      response.end();
+    }
+  });
+}
+
+exports.start = start;
+exports.upload = upload;
+exports.show = show;</code></pre>
+	</div><!-- .entry-content -->	<footer class="entry-footer">
+		<ul class="post-categories">
+          
+          <li><a href="/category/344866780.html" rel="category">javascript</a></li>
+        	</ul>
+		
+		<ul class="post-tags">
+                   <li><a href="/tags/2062854272.html" rel="tag">nodejs</a></li>
+        	</ul>
+		
+	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
+	<div id="respond" class="comment-respond">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="576b2fa533442fcecd6a81358b8d6edd" data-title="nodejs入门" data-url="http://sikisama.github.io/blog/nodejs_guide.html"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"sikisama"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+        <!-- 多说公共JS代码 end -->
+	</div><!-- #respond -->
+</div>
+					</div>
+					<!-- #main -->
+				</div>
+				<!-- #primary -->
+				<div id="secondary" class="widget-area main-sidebar col-md-3" role="complementary">
+	<aside class="widget widget_search sidebar-widget clearfix">
+	<h3 class="widget-title">搜索</h3>
+	<form class="search" action="/search" method="get">
+		<fieldset>
+			<div class="text">
+				<input name="keyword" id="keyword" type="text" placeholder="Search ..."/>
+				<button class="fa fa-search">Search</button>
+			</div>
+		</fieldset>
+	</form>
+</aside>	<aside class="widget widget_categories sidebar-widget clearfix">
+	<h3 class="widget-title">分类目录</h3>
+	<ul>
+		        <li class="cat-item"><a href="/category/1546329087.html" >tool</a></li>
+                <li class="cat-item"><a href="/category/375327200.html" >database</a></li>
+                <li class="cat-item"><a href="/category/344866780.html" >javascript</a></li>
+        	</ul>
+</aside>
+	<aside class="widget widget_archive sidebar-widget clearfix">
+	<h3 class="widget-title">文章归档</h3>
+	<ul>
+		<li><a href="/archive/201608.html">2016-08</a></li>
+		<li><a href="/archive/201607.html">2016-07</a></li>
+		<li><a href="/archive/201606.html">2016-06</a></li>
+		</ul>
+</aside>	<aside class="widget widget_recent_entries sidebar-widget clearfix">
+	<h3 class="widget-title">近期文章</h3>
+	<ul>
+	    <li><a href="/blog/nodejs_guide.html">nodejs入门</a></li>
+        <li><a href="/blog/mdx.html">mdx重要概念</a></li>
+        <li><a href="/blog/reg_express.html">正则表达式与preg函数</a></li>
+        <li><a href="/blog/git_instruction_manual.html">Git使用指南</a></li>
+    	</ul>
+</aside>
+	<aside class="widget widget_tag_cloud sidebar-widget clearfix">
+	<h3 class="widget-title">标签</h3>
+	<div class="tagcloud">
+		<a href="/tags/1141897447.html"  title="Git" >Git</a>
+		<a href="/tags/887333414.html"  title="mdx" >mdx</a>
+		<a href="/tags/2062854272.html"  title="nodejs" >nodejs</a>
+		<a href="/tags/372555671.html"  title="正则表达式" >正则表达式</a>
+		</div>
+</aside>
+	<aside class="widget widget_text sidebar-widget clearfix">
+	<h3 class="widget-title">介绍</h3>
+	<div class="textwidget">
+		<p>努力 友情 胜利</p>
+	</div>
+</aside>
+</div><!-- #secondary -->			</div>
+			<!-- .row -->
+		</div>
+		<!-- .container -->
+	</div>
+	<!-- .quest-row -->
+</div>		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 copyright-text">
+				<a href="https://github.com/jockchou/gitblog">Proudly powered by Gitblog</a>
+			</div>
+			<div class="col-md-6 social-icon-container clearfix">
+				<ul></ul>
+			</div>
+		</div>
+		<!-- end row -->
+	</div>
+	<!-- end container -->
+</footer>	</div><!-- #page -->
+	<a href="#0" class="cd-top"><i class="fa fa-angle-up"></i></a>
+
+
+<script type="text/javascript" src="/theme/quest/assets/plugins/modernizr/modernizr.custom.js?ver=2.2"></script>
+<script type="text/javascript" src="/theme/quest/js/jquery/jquery.js?ver=1.11.2"></script>
+<script type="text/javascript" src="/theme/quest/js/jquery/jquery-migrate.min.js?ver=1.2.1"></script>
+<script type="text/javascript" src="/theme/quest/assets/plugins/bootstrap/js/bootstrap.min.js?ver=2.2"></script>
+<script type="text/javascript" src="/theme/quest/assets/plugins/wow/wow.js?ver=2.2"></script>
+<script type="text/javascript" src="/theme/quest/assets/plugins/colorbox/jquery.colorbox-min.js?ver=2.2"></script>
+<script type="text/javascript" src="/theme/quest/assets/js/quest.js?ver=2.2"></script>
+	
+<link rel="stylesheet" href="http://cdn.bootcss.com/highlight.js/8.6/styles/default.min.css">
+<script src="http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>mdx重要概念|sikisama的博客</title>
-	<meta name="keywords" content="mdx,database,sikisama的博客">
-	<meta name="description" content="mdx重要概念">
+	<title>sikisama的博客</title>
+	<meta name="keywords" content="tool,sisama,博客,sikisama博客,sikisama的博客">
+	<meta name="description" content="sikisama的博客">
 	
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
@@ -30,119 +30,75 @@
 	</div>
 </div>
 </header>		    <div id="content">
-	<div class="quest-row site-content">
+					    	    	
+    	    		<div class="quest-row" id="title-container">
+	<div class="container title-container">
+		<div class="row">
+			<div class="col-md-6">
+								<h3>tool</h3>
+							</div>
+			<div class="col-md-6">
+				<ul class="breadcrumbs">
+					<li><a href="/">Home</a></li>
+										<li>tool</li>
+									</ul>
+				</div>
+		</div>
+	</div>
+</div>    		<div class="quest-row site-content">
 		<div class="container">
 			<div class="row">
-				<div id="primary" class="content-area single col-md-9">
+				<div id="primary" class="content-area col-md-9">
 					<div id="main" class="site-main" role="main">
-						<article class="post hentry">
+																										        	<article class="post hentry">
 	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/mdx.html" rel="bookmark">mdx重要概念</a></h1>
+	<h1 class="post-title"><a href="/blog/reg_express.html" rel="bookmark">正则表达式与preg函数</a></h1>
 	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-07-07</time>
+		<time class="post-date"><i class="fa fa-clock-o"></i>2016-06-27</time>
 				<span class="seperator">/</span>
 	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
 	    	</div><!-- .entry-meta -->
 </header><!-- .entry-header -->	<div class="entry-content">
-		<!--
-author: zhangxuefeng
-date: 2016-07-07
-title: mdx重要概念
-tags: mdx
-category: database
-status: publish
-summary: mdx重要概念
--->
-<blockquote>
-<p>Mdx为多维数据库提供了表达式语查询语法，用于cube数据，并提供了许多强大的分析函数，用于支持常用的OLAP分析。</p>
-</blockquote>
-<h2 id="语法">语法</h2>
-<blockquote>
-<p>维度、级别、成员等，一般用唯一名称UniqueName来标示，可以用[]包围name,如果name有空格或者数字开头，必须使用[],否则可以忽略。UniqueName是根据层次结构表示的一种方法。即递归显示出祖先的名称。</p>
-</blockquote>
-<ol>
-<li>
-<p>维度（Dimension):维度直接用[]包围。比如Product的唯一名称为[Product]或Product。</p>
-<blockquote>
-<p>[属性]是维度的基本构造块。 维度包含一组在属性关系基础上组织而成的属性。具有对外关系的任何属性必须具有与其相关属性关联的唯一键。</p>
-</blockquote>
-</li>
-<li>级别（Level）:级别的UniqueName为[维度名称].[级别名称]，如[year].[2001]，同样，如果没有空格，[]可以省略，如year.[2001]。</li>
-<li>成员（Member）:成员的UniqueName格式为[维度].(Parent  Member  UniqueName).[Member Name],如：时间维上的2003年2月份的UniqueName为[2003].[1].[2]，中间的1为1季度，因为该维度的结构为年、季、月。</li>
-<li>度量（Measure）:度量实际上是属于维度维的成员，也就是说度量（Measure）是任何Cube的一个维度。如：度量Unit Sales的UnqiueName为[Measures].[Unit Sales]</li>
-</ol>
-<h4 id="元组、集合">元组、集合</h4>
-<blockquote>
-<p>元组用于定义来自多维数据切片；他是由一个或多个维度的单个成员的有序集合组成。元组内不包含来自同一个维度的多个成员（可以理解为坐标），元组用（）包围。</p>
-</blockquote>
-<p>如：</p>
-<p>（时间.[下半年]）</p>
-<p>（时间.[下半年],[产品].[手机].[Nokia]）</p>
-<blockquote>
-<p>集合（Set）是零个、一个或多个元组的有序集合。集合最常用于在Mdx查询中定义轴维度和切片器维度，并且同样可能只具有单个元组或可能在某些情况下为空。在Mdx语法中，元组用花括号{}来构造集合</p>
-</blockquote>
-<p>举例，下面是具有两个元组的集合：</p>
-<p>{（时间.[上半年],路线.非陆地.航空），（时间.[下半年]，路线.非陆地.海路）}</p>
-<p>一个集合可包含同一个元组不止一次的出现。这样也是可以的：</p>
-<p>{时间.[下半年],时间.[下半年]}</p>
-<p>集合值以元组表示的一组成员组合，或指集合中的元组所代表的单元中的值，视集合使用的上下文而定。</p>
-<p><strong>注意：单个元组的集合不等于元组。如{时间.[下半年]}不等于  时间.[下半年]。</strong></p>
-<h4 id="Mdx基本语法结构">Mdx基本语法结构</h4>
-<pre><code>    SELECT  [axis specification] ON COLUMNS,
-
-                [axis specification] ON ROWS
-
-   FROM
-
-                [cube name]
-
-   WHERE
-
-              [silcer specification]</code></pre>
-<ol>
-<li>
-<p>[axis specification]可以看成是轴的成员选择。</p>
-</li>
-<li>[silcer specification]表示切片上的成员，可以看成过滤信息，[silcer specification]可选，如果没有指定，取系统默认的维度成员作为切片</li>
-</ol>
-<h2 id="轴维度和切片器维度">轴维度和切片器维度</h2>
-<p>当设计多维表达式（Mdx）查询时，应用程序一般查看多维数据集并将维度集合划分为两个子集：</p>
-<p>1.查询轴 - 从此层次结构集中检索多个成员的数据。</p>
-<p>2.切片器轴 - 从此层次结构集中检索单个成员的数据。</p>
+		<p>正则规范</p>
 	</div><!-- .entry-content -->	<footer class="entry-footer">
 		<ul class="post-categories">
           
-          <li><a href="/category/375327200.html" rel="category">database</a></li>
+          <li><a href="/category/1546329087.html" rel="category">tool</a></li>
         	</ul>
 		
 		<ul class="post-tags">
-                   <li><a href="/tags/887333414.html" rel="tag">mdx</a></li>
+                   <li><a href="/tags/372555671.html" rel="tag">正则表达式</a></li>
         	</ul>
 		
-	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
-	<div id="respond" class="comment-respond">
-		<!-- 多说评论框 start -->
-		<div class="ds-thread" data-thread-key="ccd41a6c737f617d825ec9e5773cd8b4" data-title="mdx重要概念" data-url="http://sikisama.github.io/blog/mdx.html"></div>
-		<!-- 多说评论框 end -->
-		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-		<script type="text/javascript">
-		var duoshuoQuery = {short_name:"sikisama"};
-		(function() {
-			var ds = document.createElement('script');
-			ds.type = 'text/javascript';ds.async = true;
-			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-			ds.charset = 'UTF-8';
-			(document.getElementsByTagName('head')[0] 
-			 || document.getElementsByTagName('body')[0]).appendChild(ds);
-		})();
-		</script>
-        <!-- 多说公共JS代码 end -->
-	</div><!-- #respond -->
-</div>
-					</div>
+		<div class="read-more">
+		<a href="/blog/reg_express.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
+	</div>
+	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        													        	<article class="post hentry">
+	<header class="entry-header">
+	<h1 class="post-title"><a href="/blog/git_instruction_manual.html" rel="bookmark">Git使用指南</a></h1>
+	<div class="entry-meta">
+		<time class="post-date"><i class="fa fa-clock-o"></i>2016-06-07</time>
+				<span class="seperator">/</span>
+	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
+	    	</div><!-- .entry-meta -->
+</header><!-- .entry-header -->	<div class="entry-content">
+		<p>总结一些git常用的命令</p>
+	</div><!-- .entry-content -->	<footer class="entry-footer">
+		<ul class="post-categories">
+          
+          <li><a href="/category/1546329087.html" rel="category">tool</a></li>
+        	</ul>
+		
+		<ul class="post-tags">
+                   <li><a href="/tags/1141897447.html" rel="tag">Git</a></li>
+        	</ul>
+		
+		<div class="read-more">
+		<a href="/blog/git_instruction_manual.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
+	</div>
+	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        																		</div>
 					<!-- #main -->
 				</div>
-				<!-- #primary -->
 				<div id="secondary" class="widget-area main-sidebar col-md-3" role="complementary">
 	<aside class="widget widget_search sidebar-widget clearfix">
 	<h3 class="widget-title">搜索</h3>
@@ -199,7 +155,7 @@ summary: mdx重要概念
 		<!-- .container -->
 	</div>
 	<!-- .quest-row -->
-</div>		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
+</div><!-- #content -->		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 copyright-text">
