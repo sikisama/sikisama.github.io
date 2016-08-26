@@ -4,9 +4,45 @@
         <description>sikisama的博客</description>
         <link>http://sikisama.github.io</link>
         <atom:link href="http://sikisama.github.io/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>2016-08-18 16:08:07</pubDate>
-        <lastBuildDate>2016-08-18 16:08:07</lastBuildDate>
+        <pubDate>2016-08-26 11:08:22</pubDate>
+        <lastBuildDate>2016-08-26 11:08:22</lastBuildDate>
         <generator>Gitblog v1.0</generator>
+                <item>
+            <title>php访问网络共享资源和本地文件</title>
+            <description>
+            &lt;!--
+author: zhangxuefeng
+date: 2016-08-26
+title: php访问网络共享资源和本地文件
+tags: PHP,windows
+category:PHP
+status: publish
+summary: php访问windows共享文件
+--&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PHP访问局域网上其他计算机共享资源的配置：
+有A（192.168.1.1） B（192.168.1.2） 两台机子。
+在A上装有appache，要访问B的共享资源，如pic_gather。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;测试代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;$filename = &quot;//192.168.1.31/pic_gather/figure/1.png&quot;;  
+$size = filesize($filename);  
+echo $size;  &lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;step1&quot;&gt;step1&lt;/h3&gt;
+&lt;p&gt;必须保证pic_gather已经能被访问（其中包括防火墙设置，共享设置，这里就不具体讲了），可以测试下，在电脑的资源管理器（应该这么叫的吧，附上图）上输入\192.168.1.2\pic_gather，能打开B机上的文件&lt;/p&gt;
+&lt;h3 id=&quot;step2&quot;&gt;step2&lt;/h3&gt;
+&lt;p&gt;A、B两天计算机必须在一个工作组下面（名称随意自己设置，但必须是一个工作组哦）（XP是 我的电脑-&amp;gt;右键-&amp;gt;属性-&amp;gt;计算机名称-&amp;gt;更改-&amp;gt;工作组，更改完得重启计算机的）（win是 计算机-&amp;gt;右键-&amp;gt;属性-&amp;gt;高级系统设置-&amp;gt;计算机名称-&amp;gt;更改-&amp;gt;工作组，更改完得重启计算机的）。(ps:作者表示，我没有在相同的组里面，依然可以)&lt;/p&gt;
+&lt;h3 id=&quot;step3&quot;&gt;step3&lt;/h3&gt;
+&lt;p&gt;B要开启guest。(ps:作者表示，我没有启用来宾模式，依然可以)&lt;/p&gt;
+&lt;h3 id=&quot;step4&quot;&gt;step4&lt;/h3&gt;
+&lt;p&gt;B上pic_gather的文件夹在共享设定方面要设定为“允许用户更改我的文件（这个可以再第一步就设置好，不设置的话，只能访问不能修改）&lt;/p&gt;
+&lt;h3 id=&quot;step5&quot;&gt;step5&lt;/h3&gt;
+&lt;p&gt;在A上， cmd里面输入services.msc后，双击apache服务，在“登录”选项卡里面，把运行账号改为登录windows的超级账号（比如Administrator），重启apache服务。(ps 想作者是一个懒人，没有装appache，只是用了集成软件zend，所以服务里面只有appche2.2-zend，其实原理一样的)。&lt;/p&gt;            </description>
+            <pubDate>2016-08-26 10:59:10</pubDate>
+            <link>http://sikisama.github.io/blog/php_access_share.html</link>
+            <guid isPermaLink="true">http://sikisama.github.io/blog/php_access_share.html</guid>
+                                               <category>PHP</category>
+                                    </item>
                 <item>
             <title>js中的apply与call</title>
             <description>
@@ -14,8 +50,8 @@
 author: zhangxuefeng
 date: 2016-08-18
 title: js中的apply与call
-tags: js
-category:js
+tags: javascript
+category:javascript
 status: publish
 summary: js中关于函数与对象的关键概念
 --&gt;
@@ -86,7 +122,7 @@ foo1();&lt;/code&gt;&lt;/pre&gt;
             <pubDate>2016-08-18 16:01:09</pubDate>
             <link>http://sikisama.github.io/blog/js_apply_call.html</link>
             <guid isPermaLink="true">http://sikisama.github.io/blog/js_apply_call.html</guid>
-                                               <category>js</category>
+                                               <category>javascript</category>
                                     </item>
                 <item>
             <title>PHP非阻塞模式</title>

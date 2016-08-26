@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>sikisama的博客</title>
-	<meta name="keywords" content="正则表达式,php,sisama,博客,sikisama博客,sikisama的博客">
-	<meta name="description" content="sikisama的博客">
+	<title>php访问网络共享资源和本地文件|sikisama的博客</title>
+	<meta name="keywords" content="PHP,windows,sikisama的博客">
+	<meta name="description" content="php访问windows共享文件">
 	
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
@@ -30,27 +30,12 @@
 	</div>
 </div>
 </header>		    <div id="content">
-					    	    	
-    	    		<div class="quest-row" id="title-container">
-	<div class="container title-container">
-		<div class="row">
-			<div class="col-md-6">
-								<h3>php</h3>
-							</div>
-			<div class="col-md-6">
-				<ul class="breadcrumbs">
-					<li><a href="/">Home</a></li>
-										<li>php</li>
-									</ul>
-				</div>
-		</div>
-	</div>
-</div>    		<div class="quest-row site-content">
+	<div class="quest-row site-content">
 		<div class="container">
 			<div class="row">
-				<div id="primary" class="content-area col-md-9">
+				<div id="primary" class="content-area single col-md-9">
 					<div id="main" class="site-main" role="main">
-																										        	<article class="post hentry">
+						<article class="post hentry">
 	<header class="entry-header">
 	<h1 class="post-title"><a href="/blog/php_access_share.html" rel="bookmark">php访问网络共享资源和本地文件</a></h1>
 	<div class="entry-meta">
@@ -59,7 +44,34 @@
 	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
 	    	</div><!-- .entry-meta -->
 </header><!-- .entry-header -->	<div class="entry-content">
-		<p>php访问windows共享文件</p>
+		<!--
+author: zhangxuefeng
+date: 2016-08-26
+title: php访问网络共享资源和本地文件
+tags: PHP,windows
+category:PHP
+status: publish
+summary: php访问windows共享文件
+-->
+<blockquote>
+<p>PHP访问局域网上其他计算机共享资源的配置：
+有A（192.168.1.1） B（192.168.1.2） 两台机子。
+在A上装有appache，要访问B的共享资源，如pic_gather。</p>
+</blockquote>
+<p>测试代码：</p>
+<pre><code>$filename = "//192.168.1.31/pic_gather/figure/1.png";  
+$size = filesize($filename);  
+echo $size;  </code></pre>
+<h3 id="step1">step1</h3>
+<p>必须保证pic_gather已经能被访问（其中包括防火墙设置，共享设置，这里就不具体讲了），可以测试下，在电脑的资源管理器（应该这么叫的吧，附上图）上输入\192.168.1.2\pic_gather，能打开B机上的文件</p>
+<h3 id="step2">step2</h3>
+<p>A、B两天计算机必须在一个工作组下面（名称随意自己设置，但必须是一个工作组哦）（XP是 我的电脑-&gt;右键-&gt;属性-&gt;计算机名称-&gt;更改-&gt;工作组，更改完得重启计算机的）（win是 计算机-&gt;右键-&gt;属性-&gt;高级系统设置-&gt;计算机名称-&gt;更改-&gt;工作组，更改完得重启计算机的）。(ps:作者表示，我没有在相同的组里面，依然可以)</p>
+<h3 id="step3">step3</h3>
+<p>B要开启guest。(ps:作者表示，我没有启用来宾模式，依然可以)</p>
+<h3 id="step4">step4</h3>
+<p>B上pic_gather的文件夹在共享设定方面要设定为“允许用户更改我的文件（这个可以再第一步就设置好，不设置的话，只能访问不能修改）</p>
+<h3 id="step5">step5</h3>
+<p>在A上， cmd里面输入services.msc后，双击apache服务，在“登录”选项卡里面，把运行账号改为登录windows的超级账号（比如Administrator），重启apache服务。(ps 想作者是一个懒人，没有装appache，只是用了集成软件zend，所以服务里面只有appche2.2-zend，其实原理一样的)。</p>
 	</div><!-- .entry-content -->	<footer class="entry-footer">
 		<ul class="post-categories">
           
@@ -71,82 +83,30 @@
                    <li><a href="/tags/1975848522.html" rel="tag">windows</a></li>
         	</ul>
 		
-		<div class="read-more">
-		<a href="/blog/php_access_share.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        													        	<article class="post hentry">
-	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/js_apply_call.html" rel="bookmark">js中的apply与call</a></h1>
-	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-08-18</time>
-				<span class="seperator">/</span>
-	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
-	    	</div><!-- .entry-meta -->
-</header><!-- .entry-header -->	<div class="entry-content">
-		<p>js中关于函数与对象的关键概念</p>
-	</div><!-- .entry-content -->	<footer class="entry-footer">
-		<ul class="post-categories">
-          
-          <li><a href="/category/344866780.html" rel="category">javascript</a></li>
-        	</ul>
-		
-		<ul class="post-tags">
-                   <li><a href="/tags/344866780.html" rel="tag">javascript</a></li>
-        	</ul>
-		
-		<div class="read-more">
-		<a href="/blog/js_apply_call.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        													        	<article class="post hentry">
-	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/php_unblocked.html" rel="bookmark">PHP非阻塞模式</a></h1>
-	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-08-16</time>
-				<span class="seperator">/</span>
-	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
-	    	</div><!-- .entry-meta -->
-</header><!-- .entry-header -->	<div class="entry-content">
-		<p>PHP非阻塞模式</p>
-	</div><!-- .entry-content -->	<footer class="entry-footer">
-		<ul class="post-categories">
-          
-          <li><a href="/category/1783669539.html" rel="category">php</a></li>
-        	</ul>
-		
-		<ul class="post-tags">
-                   <li><a href="/tags/1757610452.html" rel="tag">阻塞模式</a></li>
-                   <li><a href="/tags/1783669539.html" rel="tag">php</a></li>
-        	</ul>
-		
-		<div class="read-more">
-		<a href="/blog/php_unblocked.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        													        	<article class="post hentry">
-	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/nodejs_guide.html" rel="bookmark">nodejs入门</a></h1>
-	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-08-11</time>
-				<span class="seperator">/</span>
-	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
-	    	</div><!-- .entry-meta -->
-</header><!-- .entry-header -->	<div class="entry-content">
-		<p>nodejs经典入门</p>
-	</div><!-- .entry-content -->	<footer class="entry-footer">
-		<ul class="post-categories">
-          
-          <li><a href="/category/344866780.html" rel="category">javascript</a></li>
-        	</ul>
-		
-		<ul class="post-tags">
-                   <li><a href="/tags/2062854272.html" rel="tag">nodejs</a></li>
-        	</ul>
-		
-		<div class="read-more">
-		<a href="/blog/nodejs_guide.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        																		</div>
+	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
+	<div id="respond" class="comment-respond">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="bbc660eacf4eef72a30dfb6a657bcc5e" data-title="php访问网络共享资源和本地文件" data-url="http://sikisama.github.io/blog/php_access_share.html"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"sikisama"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+        <!-- 多说公共JS代码 end -->
+	</div><!-- #respond -->
+</div>
+					</div>
 					<!-- #main -->
 				</div>
+				<!-- #primary -->
 				<div id="secondary" class="widget-area main-sidebar col-md-3" role="complementary">
 	<aside class="widget widget_search sidebar-widget clearfix">
 	<h3 class="widget-title">搜索</h3>
@@ -211,7 +171,7 @@
 		<!-- .container -->
 	</div>
 	<!-- .quest-row -->
-</div><!-- #content -->		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
+</div>		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 copyright-text">
