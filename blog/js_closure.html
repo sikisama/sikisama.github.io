@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>sikisama的博客</title>
-	<meta name="keywords" content="javascript,sisama,博客,sikisama博客,sikisama的博客">
-	<meta name="description" content="sikisama的博客">
+	<title>javascript-闭包|sikisama的博客</title>
+	<meta name="keywords" content="javascript,sikisama的博客">
+	<meta name="description" content="javascript的闭包特性">
 	
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
@@ -30,50 +30,12 @@
 	</div>
 </div>
 </header>		    <div id="content">
-					    	    	
-    	    		<div class="quest-row" id="title-container">
-	<div class="container title-container">
-		<div class="row">
-			<div class="col-md-6">
-								<h3>javascript</h3>
-							</div>
-			<div class="col-md-6">
-				<ul class="breadcrumbs">
-					<li><a href="/">Home</a></li>
-										<li>javascript</li>
-									</ul>
-				</div>
-		</div>
-	</div>
-</div>    		<div class="quest-row site-content">
+	<div class="quest-row site-content">
 		<div class="container">
 			<div class="row">
-				<div id="primary" class="content-area col-md-9">
+				<div id="primary" class="content-area single col-md-9">
 					<div id="main" class="site-main" role="main">
-																										        	<article class="post hentry">
-	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/js_thegoodpart_object_function.html" rel="bookmark">javascript语言精粹-对象与函数</a></h1>
-	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-09-02</time>
-				<span class="seperator">/</span>
-	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
-	    	</div><!-- .entry-meta -->
-</header><!-- .entry-header -->	<div class="entry-content">
-		<p>javascript语言精粹读书笔记</p>
-	</div><!-- .entry-content -->	<footer class="entry-footer">
-		<ul class="post-categories">
-          
-          <li><a href="/category/344866780.html" rel="category">javascript</a></li>
-        	</ul>
-		
-		<ul class="post-tags">
-                   <li><a href="/tags/344866780.html" rel="tag">javascript</a></li>
-        	</ul>
-		
-		<div class="read-more">
-		<a href="/blog/js_thegoodpart_object_function.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        													        	<article class="post hentry">
+						<article class="post hentry">
 	<header class="entry-header">
 	<h1 class="post-title"><a href="/blog/js_closure.html" rel="bookmark">javascript-闭包</a></h1>
 	<div class="entry-meta">
@@ -82,7 +44,75 @@
 	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
 	    	</div><!-- .entry-meta -->
 </header><!-- .entry-header -->	<div class="entry-content">
-		<p>javascript的闭包特性</p>
+		<!--
+author: zhangxuefeng
+date: 2016-08-18
+title: javascript-闭包
+tags: javascript
+category:javascript
+status: publish
+summary: javascript的闭包特性
+-->
+<h2 id="js函数特点">js函数特点</h2>
+<blockquote>
+<p>Javascript语言的特殊之处，就在于函数内部可以直接读取全局变量。另一方面，在函数外部自然无法读取函数内的局部变量。</p>
+</blockquote>
+<pre><code>    //外部读取内部
+　  var n=999;
+　　function f1(){
+　　　　alert(n);
+　　}
+　　f1(); // 999
+　　
+　　//内部读取外部
+　　function f1(){
+　　　  var n=999;
+　　}
+　　alert(n); // error
+　　</code></pre>
+<h2 id="如何从外部读取内部变量？">如何从外部读取内部变量？</h2>
+<blockquote>
+<p>在内部定义一个访问该变量的函数，并将其return</p>
+</blockquote>
+<pre><code>function f1(){
+　　　　var n=999;
+　　　　function f2(){
+　　　　　　alert(n); 
+　　　　}
+　　　　return f2;
+　　}
+　　var result=f1();
+　　result(); // 999</code></pre>
+<h2 id="闭包的概念">闭包的概念</h2>
+<blockquote>
+<p>闭包就是能够读取其他函数内部变量的函数。</p>
+</blockquote>
+<p>由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成&quot;定义在一个函数内部的函数&quot;。
+所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
+<h2 id="闭包的用处">闭包的用处</h2>
+<ol>
+<li>可以读取函数内部的变量</li>
+<li>可以让这些变量的值始终保持在内存中</li>
+</ol>
+<pre><code>　function f1(){
+　　　　var n=999;
+　　　　nAdd=function(){n+=1}
+　　　　function f2(){
+　　　　　　alert(n);
+　　　　}
+　　　　return f2;
+　　}
+　　var result=f1();
+　　result(); // 999
+　　nAdd();
+　　result(); // 1000</code></pre>
+<p>在这段代码中，result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除。</p>
+<p>为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</p>
+<p>这段代码中另一个值得注意的地方，就是&quot;nAdd=function(){n+=1}&quot;这一行，首先在nAdd前面没有使用var关键字，因此nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。</p>
+<h2 id="总结">总结</h2>
+<blockquote>
+<p>闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value）</p>
+</blockquote>
 	</div><!-- .entry-content -->	<footer class="entry-footer">
 		<ul class="post-categories">
           
@@ -93,58 +123,30 @@
                    <li><a href="/tags/344866780.html" rel="tag">javascript</a></li>
         	</ul>
 		
-		<div class="read-more">
-		<a href="/blog/js_closure.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        													        	<article class="post hentry">
-	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/js_apply_call.html" rel="bookmark">js中的apply与call</a></h1>
-	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-08-18</time>
-				<span class="seperator">/</span>
-	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
-	    	</div><!-- .entry-meta -->
-</header><!-- .entry-header -->	<div class="entry-content">
-		<p>js中关于函数与对象的关键概念</p>
-	</div><!-- .entry-content -->	<footer class="entry-footer">
-		<ul class="post-categories">
-          
-          <li><a href="/category/344866780.html" rel="category">javascript</a></li>
-        	</ul>
-		
-		<ul class="post-tags">
-                   <li><a href="/tags/344866780.html" rel="tag">javascript</a></li>
-        	</ul>
-		
-		<div class="read-more">
-		<a href="/blog/js_apply_call.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        													        	<article class="post hentry">
-	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/nodejs_guide.html" rel="bookmark">nodejs入门</a></h1>
-	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-08-11</time>
-				<span class="seperator">/</span>
-	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
-	    	</div><!-- .entry-meta -->
-</header><!-- .entry-header -->	<div class="entry-content">
-		<p>nodejs经典入门</p>
-	</div><!-- .entry-content -->	<footer class="entry-footer">
-		<ul class="post-categories">
-          
-          <li><a href="/category/344866780.html" rel="category">javascript</a></li>
-        	</ul>
-		
-		<ul class="post-tags">
-                   <li><a href="/tags/2062854272.html" rel="tag">nodejs</a></li>
-        	</ul>
-		
-		<div class="read-more">
-		<a href="/blog/nodejs_guide.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        																		</div>
+	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
+	<div id="respond" class="comment-respond">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="47416607ff05b0b019082e6d9e7edb59" data-title="javascript-闭包" data-url="http://sikisama.github.io/blog/js_closure.html"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"sikisama"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+        <!-- 多说公共JS代码 end -->
+	</div><!-- #respond -->
+</div>
+					</div>
 					<!-- #main -->
 				</div>
+				<!-- #primary -->
 				<div id="secondary" class="widget-area main-sidebar col-md-3" role="complementary">
 	<aside class="widget widget_search sidebar-widget clearfix">
 	<h3 class="widget-title">搜索</h3>
@@ -210,7 +212,7 @@
 		<!-- .container -->
 	</div>
 	<!-- .quest-row -->
-</div><!-- #content -->		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
+</div>		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 copyright-text">
