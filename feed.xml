@@ -4,9 +4,109 @@
         <description>sikisama的博客</description>
         <link>http://sikisama.github.io</link>
         <atom:link href="http://sikisama.github.io/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>2016-09-05 08:09:48</pubDate>
-        <lastBuildDate>2016-09-05 08:09:48</lastBuildDate>
+        <pubDate>2016-09-06 14:09:29</pubDate>
+        <lastBuildDate>2016-09-06 14:09:29</lastBuildDate>
         <generator>Gitblog v1.0</generator>
+                <item>
+            <title>javascript语言精粹-数组</title>
+            <description>
+            &lt;!--
+author: zhangxuefeng
+date: 2016-09-06
+title: javascript语言精粹-数组
+tags: javascript
+category:javascript
+status: publish
+summary: javascript语言精粹读书笔记
+--&gt;
+&lt;h3 id=&quot;数组&quot;&gt;数组&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;javascript 提供一种拥有一些类数组(array-like)特性的对象。它把数组下标转变成字符串，用其作为索引。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;var numbers = ['zero','one','two','three','four','five','six'];
+var numbers_obj = {0:'zero',1:'one',2:'two',3:'three',4:'four',5:'five',6:'six'};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;两者产生的结果相似。numbsers继承自Array.prototype，而numbers_obj继承自Object.prototype，所以numbers继承了大量有用的方法，同时还有一个length属性。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;长度  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每个数组都有一个length属性，它的值是这个数组的最大整数属性名加上1。它不一定等于这个数组里的属性的个数。&lt;/p&gt;
+&lt;p&gt;设置更大的length不会给数组分配更多的空间，而把length设小将导致所有下标大于等于新length的属性被删除。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 新增一个元素到数组的尾部
+numbsers[numbsers.length] = 'seven';
+or
+numbsers.push('eight');&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;删除&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;由于 javascript的数组其实就是对象，所以delete运算符可以用来从数组中移除元素，但是这样会在数组中留下一个空洞。&lt;/p&gt;
+&lt;p&gt;slice方法可以删除一些元素并将他们替换为其他元素&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数组与对象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当属性名是小而连续的整数时用数组，否则使用对象。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;
+var is_array = function(value){
+    return value &amp;amp;&amp;amp; typeof value === 'object' &amp;amp;&amp;amp; value.constructor = Array;
+}
+
+var is_array = function(value){
+    return Object.prototype.toString.apply(value) === '[object Array]';
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;javascript提供一套数组可用的方法。这些方法是存储在Array.prototype中的函数，Array.prototype同样也是可以扩充的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Array.method('reduce',function(f,value){
+    var i;
+    for(i = 0;i&amp;lt;this.length;i += 1){
+        value = f(this[i],value);
+    }
+    return value;
+});
+
+var data = [1,2,3,4];
+
+var add = function(a,b){
+    return a+b;
+}
+
+var mult = function(a,b){
+    return a*b;
+}
+
+var sum = data.reduce(add,0);
+
+var product = data.reduce(mult,1);
+
+//因为数组其实就是对象，可以给一个单数的数组添加方法
+
+data.total = function(){
+    return this.reduce(add,0);
+}
+
+var total = data.total();&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因为字符串'total'不是整数，所以给数组增加一个total属性【并不会】改变它的length属性。当属性名是整数时，数组才是最有用的，但它依旧是对象，并且可以接受任何字符串作为属性名。&lt;/p&gt;
+&lt;p&gt;Object.create方法在数组中是没有意义的，因为它产生一个对象，而不是一个数组。产生的对象将继承这个数组的值和方法，但是没有那个特殊的length属性。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;预设值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;javascript数组通常不会设置预设值。如果用[]定义一个新的数组，它将会是空的。如果访问一个不存在的元素，将会是undefined。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Array.dim = function(dimension,initial){
+    var a = [],i;
+    for(i = 0;i &amp;lt; dimension; i+=1){
+        a[i] = initial;
+    }
+    return a;
+};
+
+var myArray = Array.dim(10,0);&lt;/code&gt;&lt;/pre&gt;            </description>
+            <pubDate>2016-09-06 14:40:20</pubDate>
+            <link>http://sikisama.github.io/blog/js_thegoodpart_array.html</link>
+            <guid isPermaLink="true">http://sikisama.github.io/blog/js_thegoodpart_array.html</guid>
+                                               <category>javascript</category>
+                                    </item>
                 <item>
             <title>javascript语言精粹-对象与函数</title>
             <description>
@@ -25,10 +125,9 @@ summary: javascript语言精粹读书笔记
 &lt;li&gt;javascript 包含一个原型链的特性，允许对象继承另外一个对象的属性。&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;一个对象的字面量就是包围在一对花括号中的零或多个【键值对】。&lt;/p&gt;
+&lt;p&gt;'||' 会取第一个为true的,'&amp;amp;&amp;amp;'会尝试取到最后一个为true的（遇到false停止）
+可以用 '||' 来填充默认值 &lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;var person = {'name':'zxf','age':24};
-
-/* '||' 会取第一个为true的,'&amp;amp;&amp;amp;'会尝试取到最后一个为true的（遇到false停止）
-可以用 '||' 来填充默认值 */
 var status = person.status || &quot;unknown&quot;;
 //尝试从undefined的成员属性中取值会导致 TypeError异常，可以通过&amp;amp;&amp;amp;运算符来避免错误
 var gril_name = person.girl &amp;amp;&amp;amp; person.girl.name;&lt;/code&gt;&lt;/pre&gt;
@@ -545,8 +644,8 @@ foo1();&lt;/code&gt;&lt;/pre&gt;
 author: zhangxuefeng
 date: 2016-08-16
 title: PHP非阻塞模式
-tags: 阻塞模式,php
-category:php
+tags: 阻塞模式,PHP
+category:PHP
 status: publish
 summary: PHP非阻塞模式
 --&gt;
@@ -610,7 +709,7 @@ function child_func() {
             <pubDate>2016-08-18 16:01:09</pubDate>
             <link>http://sikisama.github.io/blog/php_unblocked.html</link>
             <guid isPermaLink="true">http://sikisama.github.io/blog/php_unblocked.html</guid>
-                                               <category>php</category>
+                                               <category>PHP</category>
                                     </item>
                 <item>
             <title>nodejs入门</title>

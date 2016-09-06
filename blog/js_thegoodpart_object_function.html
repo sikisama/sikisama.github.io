@@ -58,10 +58,9 @@ summary: javascript语言精粹读书笔记
 <li>javascript 包含一个原型链的特性，允许对象继承另外一个对象的属性。</li>
 <li>
 <p>一个对象的字面量就是包围在一对花括号中的零或多个【键值对】。</p>
+<p>'||' 会取第一个为true的,'&amp;&amp;'会尝试取到最后一个为true的（遇到false停止）
+可以用 '||' 来填充默认值 </p>
 <pre><code>var person = {'name':'zxf','age':24};
-
-/* '||' 会取第一个为true的,'&amp;&amp;'会尝试取到最后一个为true的（遇到false停止）
-可以用 '||' 来填充默认值 */
 var status = person.status || "unknown";
 //尝试从undefined的成员属性中取值会导致 TypeError异常，可以通过&amp;&amp;运算符来避免错误
 var gril_name = person.girl &amp;&amp; person.girl.name;</code></pre>
@@ -424,7 +423,6 @@ var name = coolCat.get_name();
                 <li class="cat-item"><a href="/category/344866780.html" >javascript</a></li>
                 <li class="cat-item"><a href="/category/375327200.html" >database</a></li>
                 <li class="cat-item"><a href="/category/26890208.html" >PHP</a></li>
-                <li class="cat-item"><a href="/category/1783669539.html" >php</a></li>
         	</ul>
 </aside>
 	<aside class="widget widget_archive sidebar-widget clearfix">
@@ -438,11 +436,11 @@ var name = coolCat.get_name();
 </aside>	<aside class="widget widget_recent_entries sidebar-widget clearfix">
 	<h3 class="widget-title">近期文章</h3>
 	<ul>
-	    <li><a href="/blog/js_thegoodpart_object_function.html">javascript语言精粹-对象与函数</a></li>
+	    <li><a href="/blog/js_thegoodpart_array.html">javascript语言精粹-数组</a></li>
+        <li><a href="/blog/js_thegoodpart_object_function.html">javascript语言精粹-对象与函数</a></li>
         <li><a href="/blog/php_access_share.html">php访问网络共享资源和本地文件</a></li>
         <li><a href="/blog/js_closure.html">javascript-闭包</a></li>
         <li><a href="/blog/js_apply_call.html">js中的apply与call</a></li>
-        <li><a href="/blog/php_unblocked.html">PHP非阻塞模式</a></li>
     	</ul>
 </aside>
 	<aside class="widget widget_tag_cloud sidebar-widget clearfix">
@@ -455,7 +453,6 @@ var name = coolCat.get_name();
 		<a href="/tags/26890208.html"  title="PHP" >PHP</a>
 		<a href="/tags/1975848522.html"  title="windows" >windows</a>
 		<a href="/tags/1757610452.html"  title="阻塞模式" >阻塞模式</a>
-		<a href="/tags/1783669539.html"  title="php" >php</a>
 		<a href="/tags/372555671.html"  title="正则表达式" >正则表达式</a>
 		</div>
 </aside>
