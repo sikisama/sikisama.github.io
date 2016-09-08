@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>sikisama的博客</title>
-	<meta name="keywords" content="nodejs,PHP,sikisama,博客,sikisama博客,sikisama的博客">
-	<meta name="description" content="sikisama的博客">
+	<title>javascript语言精粹-正则表达式|sikisama的博客</title>
+	<meta name="keywords" content="javascript,sikisama的博客">
+	<meta name="description" content="javascript语言精粹读书笔记">
 	
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
@@ -29,36 +29,112 @@
 	</div>
 </div>
 </header>		    <div id="content">
-					    	    	
-    	    		<div class="quest-row" id="title-container">
-	<div class="container title-container">
-		<div class="row">
-			<div class="col-md-6">
-								<h3>PHP</h3>
-							</div>
-			<div class="col-md-6">
-				<ul class="breadcrumbs">
-					<li><a href="/">Home</a></li>
-										<li>PHP</li>
-									</ul>
-				</div>
-		</div>
-	</div>
-</div>    		<div class="quest-row site-content">
+	<div class="quest-row site-content">
 		<div class="container">
 			<div class="row">
-				<div id="primary" class="content-area col-md-9">
+				<div id="primary" class="content-area single col-md-9">
 					<div id="main" class="site-main" role="main">
-																										        	<article class="post hentry">
+						<article class="post hentry">
 	<header class="entry-header">
-	<h1 class="post-title"><a href="/blog/nodejs_guide.html" rel="bookmark">nodejs入门</a></h1>
+	<h1 class="post-title"><a href="/blog/js_thegoodpart_regex.html" rel="bookmark">javascript语言精粹-正则表达式</a></h1>
 	<div class="entry-meta">
-		<time class="post-date"><i class="fa fa-clock-o"></i>2016-08-11</time>
+		<time class="post-date"><i class="fa fa-clock-o"></i>2016-09-08</time>
 				<span class="seperator">/</span>
 	    <span><i class="fa fa-user"></i> zhangxuefeng</span>
 	    	</div><!-- .entry-meta -->
 </header><!-- .entry-header -->	<div class="entry-content">
-		<p>nodejs经典入门</p>
+		<!--
+author: zhangxuefeng
+date: 2016-09-08
+title: javascript语言精粹-正则表达式
+tags: javascript
+category:javascript
+status: publish
+summary: javascript语言精粹读书笔记
+-->
+<h3 id="正则表达式">正则表达式</h3>
+<blockquote>
+<p>javascript的许多特性都借鉴自其它语言。语法借鉴自Java，函数借鉴自Scheme，原型继承借鉴自Self。而javascript的正则表达式特性借鉴自Perl。</p>
+</blockquote>
+<pre><code>
+/*
+(?:...)表示一个【非捕获分组】 后缀 ? 表示它重复0 或者1次；
+(...)表示一个【捕获分组】，它会复制它匹配到的文本，并把其放到result数组中；
+[...]表示一个【字符类】 后缀 + 表示它会被匹配 
+后面跟着的 ： 会按照字面匹配
+*/
+(?:([A-Za-z]+):)?
+
+/*
+\/表示匹配 '/' {0,3}表示会匹配1~3次
+*/
+(\/{0,3})
+
+/*
+捕获型分组3,匹配一个主机名
+*/
+([0-9.\-A-Za-z]+)
+
+/*
+可选因子匹配端口号
+一个或多个数组的字符串会被捕获型分组4捕获
+*/
+(?::(\d+))?
+
+/*
+以一个 / 开始
+^ 表示这个类包含 ?和#之外的所有字符
+*/
+(?:\/([^?#]*))?
+
+(?:\?([^#]*))?
+
+/*
+最后一个分组以#开始，'.'会匹配除行结束符以外的所有字符
+*/
+(?:#(.*))?
+
+var parse_url = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:\#(.*))?$/;
+
+var url = 'http://www.nimei.com:8080/wtf?q#fragment';
+
+var result = parse_url.exec(url);
+</code></pre>
+<ul>
+<li>正则表达式分支</li>
+</ul>
+<p>【正则表达式分支】包含一个或多个【正则表达式序列】。这些序列被 | 字符分隔。如果这些序列中任何一项符合匹配条件，那么这个选择就匹配。</p>
+<pre><code>//会匹配in，但是它不会inf，因为in已经匹配了
+'info'.match(/in|inf/);</code></pre>
+<ul>
+<li>正则表达式序列</li>
+</ul>
+<p>一个【正则表达式序列】包含一个或多个【正则表达式因子】。每个因子选择是否跟随一个量词，这个量词决定着这个因子出现的次数。如果没有这个量词，那么该因子只会匹配一次。</p>
+<ul>
+<li>正则表达式因子</li>
+</ul>
+<p>一个【正则表达式因子】可以是一个字符，一个由括号包围的组，一个字符类，或者一个转义序列。</p>
+<p>可以给任何特殊字符添加一个 \ 前缀来使其字面化</p>
+<ul>
+<li>正则表达式分组</li>
+</ul>
+<ol>
+<li>捕获型 (...)</li>
+<li>非捕获型 (?:...) 不会影响分组的编号</li>
+<li>向前正向匹配(?=....)</li>
+<li>向前负向匹配</li>
+</ol>
+<ul>
+<li>正则表达式量词</li>
+</ul>
+<p>【正则表达式因子】可以用一个【正则表达式量词】后缀来决定这个因子应该被匹配的次数。</p>
+<p>/www/ 和 /w{3}/一样</p>
+<p>{3,6}会匹配3、4、5或6次</p>
+<p>{3,}会匹配3次或更多</p>
+<p>? 等同于 {0,1} ，*等同于 {0,}，+等同于{1,}</p>
+<blockquote>
+<p>如果只有一个量词，表示趋向于贪婪性匹配，即匹配尽可能多的副本直至达到上线。如果这个量词增加一个后缀 ?，则表示趋于非贪婪匹配，即只要匹配比较的副本就好。</p>
+</blockquote>
 	</div><!-- .entry-content -->	<footer class="entry-footer">
 		<ul class="post-categories">
           
@@ -66,15 +142,33 @@
         	</ul>
 		
 		<ul class="post-tags">
-                   <li><a href="/tags/2062854272.html" rel="tag">nodejs</a></li>
+                   <li><a href="/tags/344866780.html" rel="tag">javascript</a></li>
         	</ul>
 		
-		<div class="read-more">
-		<a href="/blog/nodejs_guide.html">阅读全文<i class="fa fa-angle-double-right "></i></a>
-	</div>
-	</footer><!-- .entry-footer --></article><!-- #post-## -->					        						        																		</div>
+	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
+	<div id="respond" class="comment-respond">
+		<!-- 多说评论框 start -->
+		<div class="ds-thread" data-thread-key="1990d7c88bacd8718eff73b5dda29dad" data-title="javascript语言精粹-正则表达式" data-url="http://sikisama.github.io/blog/js_thegoodpart_regex.html"></div>
+		<!-- 多说评论框 end -->
+		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+		<script type="text/javascript">
+		var duoshuoQuery = {short_name:"sikisama"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+        <!-- 多说公共JS代码 end -->
+	</div><!-- #respond -->
+</div>
+					</div>
 					<!-- #main -->
 				</div>
+				<!-- #primary -->
 				<div id="secondary" class="widget-area main-sidebar col-md-3" role="complementary">
 	<aside class="widget widget_search sidebar-widget clearfix">
 	<h3 class="widget-title">搜索</h3>
@@ -138,7 +232,7 @@
 		<!-- .container -->
 	</div>
 	<!-- .quest-row -->
-</div><!-- #content -->		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
+</div>		    <footer id="colophon" class="copyright quest-row" role="contentinfo">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 copyright-text">
