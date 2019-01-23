@@ -3,15 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>js中的apply与call|sikisama的博客</title>
-	<meta name="keywords" content="javascript,sikisama的博客">
+	<title>js中的apply与call|蜻蜓的博客</title>
+	<meta name="keywords" content="javascript,蜻蜓的博客">
 	<meta name="description" content="js中关于函数与对象的关键概念">
 	
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/css/style.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/css/customizer.css?ver=2.2" type="text/css" media="all" />
-	<link rel="alternate" type="application/rss+xml" title="sikisama的博客" href="http://sikisama.github.io/feed.xml" />
+	<link rel="alternate" type="application/rss+xml" title="蜻蜓的博客" href="//feed.xml" />
 	
 	</head>
 
@@ -22,8 +22,8 @@
 <div class="container">
 	<div class="row">
 		<div class="site-branding col-md-4">
-			<h1 class="site-title"><a href="http://sikisama.github.io" rel="home">sikisama的博客</a></h1>
-				<span class="site-description">知行合一</span>
+			<h1 class="site-title"><a href="/" rel="home">蜻蜓的博客</a></h1>
+				<span class="site-description"></span>
 		</div>
 		<!-- .site-branding -->
 	</div>
@@ -107,7 +107,9 @@ foo.call(m, 5);
 var foo1 = foo.bind(m, 5);
 foo1();</code></pre>
 <h3 id="补充：">补充：</h3>
-<p>在 js 里想定义一个函数，于是你会这么写:</p>
+<ol>
+<li>使用apply的好处是可以直接将当前函数的arguments对象作为apply的第二个参数传入 </li>
+<li>在 js 里想定义一个函数，于是你会这么写:
 <pre><code>function jam() {};</code></pre>
 <p>其实这是 js 里的一种语法糖，它等价于：</p>
 <pre><code>var jam = function() {};</code></pre>
@@ -115,7 +117,8 @@ foo1();</code></pre>
 <pre><code>function jam() {}();</code></pre>
 <p>但是这么写就报错了，其实这种写法也不算错，因为它确实是 js 支持的函数表达式，但是同时 js 又规定以 function 开头的语句被认为是函数语句，而函数语句后面是肯定不会带 () 的，所以才报错，于是聪明的人想出来，加上一对括号就可以了。于是就变成了这样：</p>
 <pre><code>(function jam() {}());</code></pre>
-<p>这样就定义了一个函数同时也执行它</p>
+<p>这样就定义了一个函数同时也执行它</p></li>
+</ol>
 	</div><!-- .entry-content -->	<footer class="entry-footer">
 		<ul class="post-categories">
           
@@ -126,27 +129,7 @@ foo1();</code></pre>
                    <li><a href="/tags/344866780.html" rel="tag">javascript</a></li>
         	</ul>
 		
-	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
-	<div id="respond" class="comment-respond">
-		<!-- 多说评论框 start -->
-		<div class="ds-thread" data-thread-key="4170762b08c93d4b863b57d345b96a88" data-title="js中的apply与call" data-url="http://sikisama.github.io/blog/js_apply_call.html"></div>
-		<!-- 多说评论框 end -->
-		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-		<script type="text/javascript">
-		var duoshuoQuery = {short_name:"sikisama"};
-		(function() {
-			var ds = document.createElement('script');
-			ds.type = 'text/javascript';ds.async = true;
-			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-			ds.charset = 'UTF-8';
-			(document.getElementsByTagName('head')[0] 
-			 || document.getElementsByTagName('body')[0]).appendChild(ds);
-		})();
-		</script>
-        <!-- 多说公共JS代码 end -->
-	</div><!-- #respond -->
-</div>
-					</div>
+	</footer><!-- .entry-footer --></article><!-- #post-## -->            								</div>
 					<!-- #main -->
 				</div>
 				<!-- #primary -->
@@ -164,47 +147,50 @@ foo1();</code></pre>
 </aside>	<aside class="widget widget_categories sidebar-widget clearfix">
 	<h3 class="widget-title">分类目录</h3>
 	<ul>
-		        <li class="cat-item"><a href="/category/1546329087.html" >tool</a></li>
-                <li class="cat-item"><a href="/category/344866780.html" >javascript</a></li>
+		        <li class="cat-item"><a href="/category/344866780.html" >javascript</a></li>
+                <li class="cat-item"><a href="/category/1546329087.html" >tool</a></li>
                 <li class="cat-item"><a href="/category/375327200.html" >database</a></li>
                 <li class="cat-item"><a href="/category/26890208.html" >PHP</a></li>
+                <li class="cat-item"><a href="/category/107260689.html" >GitBlog</a></li>
         	</ul>
 </aside>
 	<aside class="widget widget_archive sidebar-widget clearfix">
 	<h3 class="widget-title">文章归档</h3>
 	<ul>
+		<li><a href="/archive/201507.html">2015-07</a></li>
 		<li><a href="/archive/201607.html">2016-07</a></li>
-		<li><a href="/archive/201609.html">2016-09</a></li>
 		<li><a href="/archive/201608.html">2016-08</a></li>
 		<li><a href="/archive/201606.html">2016-06</a></li>
+		<li><a href="/archive/201609.html">2016-09</a></li>
 		</ul>
 </aside>	<aside class="widget widget_recent_entries sidebar-widget clearfix">
 	<h3 class="widget-title">近期文章</h3>
 	<ul>
-	    <li><a href="/blog/js_thegoodpart_regex.html">javascript语言精粹-正则表达式</a></li>
+	    <li><a href="/blog/angularJs_cmd.html">AngularJs-指令</a></li>
+        <li><a href="/blog/js_thegoodpart_regex.html">javascript语言精粹-正则表达式</a></li>
         <li><a href="/blog/js_thegoodpart_array.html">javascript语言精粹-数组</a></li>
         <li><a href="/blog/js_thegoodpart_object_function.html">javascript语言精粹-对象与函数</a></li>
         <li><a href="/blog/php_access_share.html">php访问网络共享资源和本地文件</a></li>
-        <li><a href="/blog/js_closure.html">javascript-闭包</a></li>
     	</ul>
 </aside>
 	<aside class="widget widget_tag_cloud sidebar-widget clearfix">
 	<h3 class="widget-title">标签</h3>
 	<div class="tagcloud">
-		<a href="/tags/1141897447.html"  title="Git" >Git</a>
 		<a href="/tags/344866780.html"  title="javascript" >javascript</a>
+		<a href="/tags/1141897447.html"  title="Git" >Git</a>
 		<a href="/tags/887333414.html"  title="mdx" >mdx</a>
 		<a href="/tags/2062854272.html"  title="nodejs" >nodejs</a>
 		<a href="/tags/26890208.html"  title="PHP" >PHP</a>
 		<a href="/tags/1975848522.html"  title="windows" >windows</a>
 		<a href="/tags/1757610452.html"  title="阻塞模式" >阻塞模式</a>
 		<a href="/tags/372555671.html"  title="正则表达式" >正则表达式</a>
+		<a href="/tags/107260689.html"  title="GitBlog" >GitBlog</a>
 		</div>
 </aside>
 	<aside class="widget widget_text sidebar-widget clearfix">
 	<h3 class="widget-title">介绍</h3>
 	<div class="textwidget">
-		<p>努力 友情 胜利</p>
+		<p>享工作 乐生活</p>
 	</div>
 </aside>
 </div><!-- #secondary -->			</div>

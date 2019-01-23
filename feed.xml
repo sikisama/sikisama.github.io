@@ -1,12 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>sikisama的博客</title>
-        <description>sikisama的博客</description>
-        <link>http://sikisama.github.io</link>
-        <atom:link href="http://sikisama.github.io/feed.xml" rel="self" type="application/rss+xml" />
-        <pubDate>2016-09-08 10:09:31</pubDate>
-        <lastBuildDate>2016-09-08 10:09:31</lastBuildDate>
+        <title>蜻蜓的博客</title>
+        <description>知行合一</description>
+        <link>/</link>
+        <atom:link href="//feed.xml" rel="self" type="application/rss+xml" />
+        <pubDate>2019-01-23 08:01:55</pubDate>
+        <lastBuildDate>2019-01-23 08:01:55</lastBuildDate>
         <generator>Gitblog v1.0</generator>
+                <item>
+            <title>AngularJs-指令</title>
+            <description>
+            &lt;!--
+author: zhangxuefeng
+date: 2016-09-16
+title: AngularJs-指令
+tags: javascript
+category:javascript
+status: publish
+summary: Angular学习笔记，关于指令
+--&gt;
+&lt;h2 id=&quot;引入&quot;&gt;引入&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script src=&quot;http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;ng-app 指令定义一个 AngularJS 应用程序。&lt;/li&gt;
+&lt;li&gt;ng-model 指令把元素值（比如输入域的值）绑定到应用程序。&lt;/li&gt;
+&lt;li&gt;ng-bind 指令把应用程序数据绑定到 HTML 视图。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div ng-app=&quot;&quot;&amp;gt;
+    &amp;lt;p&amp;gt;名字 : &amp;lt;input type=&quot;text&quot; ng-model=&quot;name&quot;&amp;gt;&amp;lt;/p&amp;gt;
+    &amp;lt;h1&amp;gt;Hello {{name}}&amp;lt;/h1&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;指令&quot;&gt;指令&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ng-app&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ng-app 指令定义了AngularJs的【根元素】。ng-app在网页加载完毕时会自动引导应用程序。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ng-init&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ng-init 指令通常为AngularJs应用程序定义了【初始值】。通常情况下会使用一个控制器或者一个模块来代替它。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;ng-model
+&lt;blockquote&gt;
+&lt;p&gt;ng-model指令绑定【HTML元素】到相应程序数据。&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;myCtrl&quot;&amp;gt;
+    名字: &amp;lt;input ng-model=&quot;name&quot;&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&amp;lt;script&amp;gt;
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.name = &quot;John Doe&quot;;
+});
+&amp;lt;/script&amp;gt;
+
+//双向绑定
+&amp;lt;div ng-app=&quot;myApp&quot; ng-controller=&quot;myCtrl&quot;&amp;gt;
+    名字: &amp;lt;input ng-model=&quot;name&quot;&amp;gt;
+    &amp;lt;h1&amp;gt;你输入了: {{name}}&amp;lt;/h1&amp;gt;
+&amp;lt;/div&amp;gt;
+
+//用户输入验证
+&amp;lt;form ng-app=&quot;&quot; name=&quot;myForm&quot;&amp;gt;
+    Email:
+    &amp;lt;input type=&quot;email&quot; name=&quot;myAddress&quot; ng-model=&quot;text&quot;&amp;gt;
+    &amp;lt;span ng-show=&quot;myForm.myAddress.$error.email&quot;&amp;gt;不是一个合法的邮箱地址&amp;lt;/span&amp;gt;
+&amp;lt;/form&amp;gt;
+
+//应用状态，ng-model 指令可以为应用数据提供状态值(invalid, dirty, touched, error):
+
+&amp;lt;form ng-app=&quot;&quot; name=&quot;myForm&quot; ng-init=&quot;myText = 'test@runoob.com'&quot;&amp;gt;
+    Email:
+    &amp;lt;input type=&quot;email&quot; name=&quot;myAddress&quot; ng-model=&quot;myText&quot; required&amp;gt;&amp;lt;/p&amp;gt;
+    &amp;lt;h1&amp;gt;状态&amp;lt;/h1&amp;gt;
+    {{myForm.myAddress.$valid}}
+    {{myForm.myAddress.$dirty}}
+    {{myForm.myAddress.$touched}}
+&amp;lt;/form&amp;gt;
+
+//CSS类
+/*
+ng-model 指令根据表单域的状态添加/移除以下类：
+ng-empty
+ng-not-empty
+ng-touched
+ng-untouched
+ng-valid
+ng-invalid
+ng-dirty
+ng-pending
+ng-pristine
+*/
+&amp;lt;style&amp;gt;
+input.ng-invalid {
+    background-color: lightblue;
+}
+&amp;lt;/style&amp;gt;
+&amp;lt;body&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ng-model 指令也可以：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;为应用程序数据提供类型验证（number、email、required）。&lt;/li&gt;
+&lt;li&gt;为应用程序数据提供状态（invalid、dirty、touched、error）。&lt;/li&gt;
+&lt;li&gt;为 HTML 元素提供 CSS 类。&lt;/li&gt;
+&lt;li&gt;绑定 HTML 元素到 HTML 表单。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;ng-repeat &lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ng-repeat 指令对于集合中（数组中）的每个项会 克隆一次 HTML 元素。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义指令&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;除了 AngularJS 内置的指令外，我们还可以创建自定义指令。
+你可以使用 .directive 函数来添加自定义的指令。
+要调用自定义指令，HTML 元素上需要添加自定义指令名。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;body ng-app=&quot;myApp&quot;&amp;gt;
+
+&amp;lt;runoob-directive&amp;gt;&amp;lt;/runoob-directive&amp;gt;
+
+&amp;lt;script&amp;gt;
+var app = angular.module(&quot;myApp&quot;, []);
+app.directive(&quot;runoobDirective&quot;, function() {
+    return {
+        template : &quot;&amp;lt;h1&amp;gt;自定义指令!&amp;lt;/h1&amp;gt;&quot;
+    };
+});
+&amp;lt;/script&amp;gt;
+
+&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以通过以下方式调用&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;元素名 restrict:'E'&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;runoob-directive&amp;gt;&amp;lt;/runoob-directive&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;属性 restrict:'A'&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div runoob-directive&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;类名 restrict:'C'
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&quot;runoob-directive&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;注释 restrict:'M',replace : true,
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- directive: runoob-directive --&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;            </description>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/angularJs_cmd.html</link>
+            <guid isPermaLink="true">//blog/angularJs_cmd.html</guid>
+                                               <category>javascript</category>
+                                    </item>
                 <item>
             <title>javascript语言精粹-正则表达式</title>
             <description>
@@ -102,9 +254,9 @@ var result = parse_url.exec(url);
 &lt;blockquote&gt;
 &lt;p&gt;如果只有一个量词，表示趋向于贪婪性匹配，即匹配尽可能多的副本直至达到上线。如果这个量词增加一个后缀 ?，则表示趋于非贪婪匹配，即只要匹配比较的副本就好。&lt;/p&gt;
 &lt;/blockquote&gt;            </description>
-            <pubDate>2016-09-08 10:21:28</pubDate>
-            <link>http://sikisama.github.io/blog/js_thegoodpart_regex.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/js_thegoodpart_regex.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/js_thegoodpart_regex.html</link>
+            <guid isPermaLink="true">//blog/js_thegoodpart_regex.html</guid>
                                                <category>javascript</category>
                                     </item>
                 <item>
@@ -202,9 +354,9 @@ var total = data.total();&lt;/code&gt;&lt;/pre&gt;
 };
 
 var myArray = Array.dim(10,0);&lt;/code&gt;&lt;/pre&gt;            </description>
-            <pubDate>2016-09-06 14:40:20</pubDate>
-            <link>http://sikisama.github.io/blog/js_thegoodpart_array.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/js_thegoodpart_array.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/js_thegoodpart_array.html</link>
+            <guid isPermaLink="true">//blog/js_thegoodpart_array.html</guid>
                                                <category>javascript</category>
                                     </item>
                 <item>
@@ -224,8 +376,8 @@ summary: javascript语言精粹读书笔记
 &lt;li&gt;javascript中，对象是可变的键控集合（keyed collection）。对象是属性的容器，其中每个属性都拥有名字和值。属性的名字可以是包含字符串在内的任意字符。属性值可以是除undefined值外的任何值。&lt;/li&gt;
 &lt;li&gt;javascript 包含一个原型链的特性，允许对象继承另外一个对象的属性。&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;一个对象的字面量就是包围在一对花括号中的零或多个【键值对】。&lt;/p&gt;
-&lt;p&gt;'||' 会取第一个为true的,'&amp;amp;&amp;amp;'会尝试取到最后一个为true的（遇到false停止）
+&lt;p&gt;一个对象的字面量就是包围在一对花括号中的零或多个【键值对】。
+'||' 会取第一个为true的,'&amp;amp;&amp;amp;'会尝试取到最后一个为true的（遇到false停止）
 可以用 '||' 来填充默认值 &lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;var person = {'name':'zxf','age':24};
 var status = person.status || &quot;unknown&quot;;
@@ -250,7 +402,7 @@ person.hasOwnProperty('name');&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;javascript中函数就是对象。对象是【名/值】对的集合并拥有一个连接到原型对象的隐藏连接。对象的字面常量连接到Object.protoype（也是一个object）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;因为函数时对象，所以他们可以像任何其他值一样被使用。
-函数可以在保存变量、对象和数组中。函数可以被当做参数传递给其他函数，函数也可以再返回函数。而且，因为函数时对象，所以函数可以拥有方法。&lt;/p&gt;
+函数可以在保存变量、对象和数组中。函数可以被当做参数传递给其他函数，函数也可以再返回函数。而且，因为函数是对象，所以函数可以拥有方法。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;函数的与众不同在于他们可以被调用。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -538,9 +690,9 @@ var name = coolCat.get_name();
 
     return that;
 };&lt;/code&gt;&lt;/pre&gt;            </description>
-            <pubDate>2016-09-02 17:14:09</pubDate>
-            <link>http://sikisama.github.io/blog/js_thegoodpart_object_function.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/js_thegoodpart_object_function.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/js_thegoodpart_object_function.html</link>
+            <guid isPermaLink="true">//blog/js_thegoodpart_object_function.html</guid>
                                                <category>javascript</category>
                                     </item>
                 <item>
@@ -574,10 +726,94 @@ echo $size;  &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;B上pic_gather的文件夹在共享设定方面要设定为“允许用户更改我的文件（这个可以再第一步就设置好，不设置的话，只能访问不能修改）&lt;/p&gt;
 &lt;h3 id=&quot;step5&quot;&gt;step5&lt;/h3&gt;
 &lt;p&gt;在A上， cmd里面输入services.msc后，双击apache服务，在“登录”选项卡里面，把运行账号改为登录windows的超级账号（比如Administrator），重启apache服务。(ps 想作者是一个懒人，没有装appache，只是用了集成软件zend，所以服务里面只有appche2.2-zend，其实原理一样的)。&lt;/p&gt;            </description>
-            <pubDate>2016-08-26 10:59:10</pubDate>
-            <link>http://sikisama.github.io/blog/php_access_share.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/php_access_share.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/php_access_share.html</link>
+            <guid isPermaLink="true">//blog/php_access_share.html</guid>
                                                <category>PHP</category>
+                                    </item>
+                <item>
+            <title>js中的apply与call</title>
+            <description>
+            &lt;!--
+author: zhangxuefeng
+date: 2016-08-18
+title: js中的apply与call
+tags: javascript
+category:javascript
+status: publish
+summary: js中关于函数与对象的关键概念
+--&gt;
+&lt;p&gt;js 里函数调用有 4 种模式：方法调用、正常函数调用、构造器函数调用、apply/call 调用。&lt;/p&gt;
+&lt;p&gt;同时，无论哪种函数调用除了你声明时定义的形参外，还会自动添加 2 个形参，分别是 this 和 arguments。&lt;/p&gt;
+&lt;h3 id=&quot;方法调用&quot;&gt;方法调用&lt;/h3&gt;
+&lt;p&gt;函数是一个对象的属性&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var a = {    
+    v : 0,    
+    f : function(xx) {                
+        this.v = xx;    
+    }
+}
+a.f(5);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面函数里的 this 就绑定的是这个对象 a。所以 this.v 可以取到对象 a 的属性 v。&lt;/p&gt;
+&lt;h3 id=&quot;正常函数调用&quot;&gt;正常函数调用&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;function f(xx) {        
+    this.x = xx;
+}
+f(5);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;f 里的 this 绑定的是全局对象，如果是在浏览器运行的解释器中，一般来说是 window 对象。所以这里 this.x 访问的其实是 window.x ，当然，如果 window 没有 x 属性，相当于是给 window 对象添加了一个 x 属性，同时赋值。&lt;/p&gt;
+&lt;h3 id=&quot;构造器函数调用&quot;&gt;构造器函数调用&lt;/h3&gt;
+&lt;p&gt;如果你在一个函数前面带上 new 关键字来调用，那么 js 会创建一个 prototype 属性是此函数的一个新对象，同时在调用这个函数的时候，把 this 绑定到这个新对象上。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function a(xx) {        
+    this.m = xx;
+}
+var b = new a(5);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里this 绑定的就不再是前面讲到的全局对象了，而是这里说的创建的新对象。&lt;/p&gt;
+&lt;h2 id=&quot;apply/call 调用&quot;&gt;apply/call 调用&lt;/h2&gt;
+&lt;p&gt;在 js 里，&lt;strong&gt;函数其实也是一个对象&lt;/strong&gt;，那么函数自然也可以拥有它自己的方法。在 js 里，每个函数都有一个公共的 prototype —— Function，而这个原型自带有好几个属性和方法，其中就有这里困惑的 bind、call、apply 方法。&lt;/p&gt;
+&lt;p&gt;先说 apply 方法，它让我们构造一个参数数组传递给函数，同时可以自己来设置 this 的值，这就是它最强大的地方，上面的 3 种函数调用方式，你可以看到，this 都是自动绑定的，没办法由你来设，当你想设的时候，就可以用 apply() 了。apply 函数接收 2 个参数，第一个是传递给这个函数用来绑定 this 的值，第二个是一个参数数组。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function a(xx) {        
+    this.b = xx;
+}
+var o = {};
+a.apply(o, [5]);
+alert(a.b);    // undefined
+alert(o.b);    // 5&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面 apply() 接收两个参数，第一个是绑定 this 的值，第二个是一个参数数组，注意它是一个数组，你想传递给这个函数的所有参数都放在数组里，然后 apply() 函数会在调用函数时自动帮你把数组展开。而 call() 呢，它的第一个参数也是绑定给 this 的值，但是后面接受的是不定参数，而不再是一个数组，也就是说你可以像平时给函数传参那样把这些参数一个一个传递。所以如果一定要说有什么区别的话，看起来是这样的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function a(xx, yy) {    
+    alert(xx, yy);    
+    alert(this);    
+    alert(arguments);
+}
+a.apply(null, [5, 55]);
+a.call(null, 5, 55);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;最后再来说 bind() 函数，上面讲的无论是 call() 也好， apply() 也好，都是立马就调用了对应的函数，而 bind() 不会， bind() 会生成一个新的函数，bind() 函数的参数跟 call() 一致，第一个参数也是绑定 this 的值，后面接受传递给函数的不定参数。 bind() 生成的新函数返回后，你想什么时候调就什么时候调，看下代码就明白了&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var m = {   
+    &quot;x&quot; : 1
+};
+function foo(y) {
+    alert(this.x + y);
+}
+foo.apply(m, [5]);
+foo.call(m, 5);
+var foo1 = foo.bind(m, 5);
+foo1();&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;补充：&quot;&gt;补充：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;使用apply的好处是可以直接将当前函数的arguments对象作为apply的第二个参数传入 &lt;/li&gt;
+&lt;li&gt;在 js 里想定义一个函数，于是你会这么写:
+&lt;pre&gt;&lt;code&gt;function jam() {};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其实这是 js 里的一种语法糖，它等价于：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var jam = function() {};&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后你想执行这个函数，脑洞大开的你会这么写：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function jam() {}();&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;但是这么写就报错了，其实这种写法也不算错，因为它确实是 js 支持的函数表达式，但是同时 js 又规定以 function 开头的语句被认为是函数语句，而函数语句后面是肯定不会带 () 的，所以才报错，于是聪明的人想出来，加上一对括号就可以了。于是就变成了这样：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(function jam() {}());&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样就定义了一个函数同时也执行它&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;            </description>
+            <pubDate>2019-01-23 02:43:07</pubDate>
+            <link>//blog/js_apply_call.html</link>
+            <guid isPermaLink="true">//blog/js_apply_call.html</guid>
+                                               <category>javascript</category>
                                     </item>
                 <item>
             <title>javascript-闭包</title>
@@ -651,90 +887,9 @@ summary: javascript的闭包特性
 &lt;blockquote&gt;
 &lt;p&gt;闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value）&lt;/p&gt;
 &lt;/blockquote&gt;            </description>
-            <pubDate>2016-09-02 17:14:09</pubDate>
-            <link>http://sikisama.github.io/blog/js_closure.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/js_closure.html</guid>
-                                               <category>javascript</category>
-                                    </item>
-                <item>
-            <title>js中的apply与call</title>
-            <description>
-            &lt;!--
-author: zhangxuefeng
-date: 2016-08-18
-title: js中的apply与call
-tags: javascript
-category:javascript
-status: publish
-summary: js中关于函数与对象的关键概念
---&gt;
-&lt;p&gt;js 里函数调用有 4 种模式：方法调用、正常函数调用、构造器函数调用、apply/call 调用。&lt;/p&gt;
-&lt;p&gt;同时，无论哪种函数调用除了你声明时定义的形参外，还会自动添加 2 个形参，分别是 this 和 arguments。&lt;/p&gt;
-&lt;h3 id=&quot;方法调用&quot;&gt;方法调用&lt;/h3&gt;
-&lt;p&gt;函数是一个对象的属性&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var a = {    
-    v : 0,    
-    f : function(xx) {                
-        this.v = xx;    
-    }
-}
-a.f(5);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;上面函数里的 this 就绑定的是这个对象 a。所以 this.v 可以取到对象 a 的属性 v。&lt;/p&gt;
-&lt;h3 id=&quot;正常函数调用&quot;&gt;正常函数调用&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;function f(xx) {        
-    this.x = xx;
-}
-f(5);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;f 里的 this 绑定的是全局对象，如果是在浏览器运行的解释器中，一般来说是 window 对象。所以这里 this.x 访问的其实是 window.x ，当然，如果 window 没有 x 属性，相当于是给 window 对象添加了一个 x 属性，同时赋值。&lt;/p&gt;
-&lt;h3 id=&quot;构造器函数调用&quot;&gt;构造器函数调用&lt;/h3&gt;
-&lt;p&gt;如果你在一个函数前面带上 new 关键字来调用，那么 js 会创建一个 prototype 属性是此函数的一个新对象，同时在调用这个函数的时候，把 this 绑定到这个新对象上。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function a(xx) {        
-    this.m = xx;
-}
-var b = new a(5);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这里this 绑定的就不再是前面讲到的全局对象了，而是这里说的创建的新对象。&lt;/p&gt;
-&lt;h2 id=&quot;apply/call 调用&quot;&gt;apply/call 调用&lt;/h2&gt;
-&lt;p&gt;在 js 里，&lt;strong&gt;函数其实也是一个对象&lt;/strong&gt;，那么函数自然也可以拥有它自己的方法。在 js 里，每个函数都有一个公共的 prototype —— Function，而这个原型自带有好几个属性和方法，其中就有这里困惑的 bind、call、apply 方法。&lt;/p&gt;
-&lt;p&gt;先说 apply 方法，它让我们构造一个参数数组传递给函数，同时可以自己来设置 this 的值，这就是它最强大的地方，上面的 3 种函数调用方式，你可以看到，this 都是自动绑定的，没办法由你来设，当你想设的时候，就可以用 apply() 了。apply 函数接收 2 个参数，第一个是传递给这个函数用来绑定 this 的值，第二个是一个参数数组。&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function a(xx) {        
-    this.b = xx;
-}
-var o = {};
-a.apply(o, [5]);
-alert(a.b);    // undefined
-alert(o.b);    // 5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;上面 apply() 接收两个参数，第一个是绑定 this 的值，第二个是一个参数数组，注意它是一个数组，你想传递给这个函数的所有参数都放在数组里，然后 apply() 函数会在调用函数时自动帮你把数组展开。而 call() 呢，它的第一个参数也是绑定给 this 的值，但是后面接受的是不定参数，而不再是一个数组，也就是说你可以像平时给函数传参那样把这些参数一个一个传递。所以如果一定要说有什么区别的话，看起来是这样的：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function a(xx, yy) {    
-    alert(xx, yy);    
-    alert(this);    
-    alert(arguments);
-}
-a.apply(null, [5, 55]);
-a.call(null, 5, 55);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;最后再来说 bind() 函数，上面讲的无论是 call() 也好， apply() 也好，都是立马就调用了对应的函数，而 bind() 不会， bind() 会生成一个新的函数，bind() 函数的参数跟 call() 一致，第一个参数也是绑定 this 的值，后面接受传递给函数的不定参数。 bind() 生成的新函数返回后，你想什么时候调就什么时候调，看下代码就明白了&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var m = {   
-    &quot;x&quot; : 1
-};
-function foo(y) {
-    alert(this.x + y);
-}
-foo.apply(m, [5]);
-foo.call(m, 5);
-var foo1 = foo.bind(m, 5);
-foo1();&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;补充：&quot;&gt;补充：&lt;/h3&gt;
-&lt;p&gt;在 js 里想定义一个函数，于是你会这么写:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function jam() {};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;其实这是 js 里的一种语法糖，它等价于：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;var jam = function() {};&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;然后你想执行这个函数，脑洞大开的你会这么写：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;function jam() {}();&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;但是这么写就报错了，其实这种写法也不算错，因为它确实是 js 支持的函数表达式，但是同时 js 又规定以 function 开头的语句被认为是函数语句，而函数语句后面是肯定不会带 () 的，所以才报错，于是聪明的人想出来，加上一对括号就可以了。于是就变成了这样：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;(function jam() {}());&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;这样就定义了一个函数同时也执行它&lt;/p&gt;            </description>
-            <pubDate>2016-08-18 16:01:09</pubDate>
-            <link>http://sikisama.github.io/blog/js_apply_call.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/js_apply_call.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/js_closure.html</link>
+            <guid isPermaLink="true">//blog/js_closure.html</guid>
                                                <category>javascript</category>
                                     </item>
                 <item>
@@ -806,9 +961,9 @@ function child_func() {
     echo &quot;Child process exit pid is &quot; . getmypid() . &quot;\n&quot;;
     exit(0);
 }&lt;/code&gt;&lt;/pre&gt;            </description>
-            <pubDate>2016-08-18 16:01:09</pubDate>
-            <link>http://sikisama.github.io/blog/php_unblocked.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/php_unblocked.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/php_unblocked.html</link>
+            <guid isPermaLink="true">//blog/php_unblocked.html</guid>
                                                <category>PHP</category>
                                     </item>
                 <item>
@@ -1300,9 +1455,9 @@ function show(response) {
 exports.start = start;
 exports.upload = upload;
 exports.show = show;&lt;/code&gt;&lt;/pre&gt;            </description>
-            <pubDate>2016-08-11 10:36:31</pubDate>
-            <link>http://sikisama.github.io/blog/nodejs_guide.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/nodejs_guide.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/nodejs_guide.html</link>
+            <guid isPermaLink="true">//blog/nodejs_guide.html</guid>
                                                <category>javascript</category>
                                     </item>
                 <item>
@@ -1373,9 +1528,9 @@ summary: mdx重要概念
 &lt;p&gt;当设计多维表达式（Mdx）查询时，应用程序一般查看多维数据集并将维度集合划分为两个子集：&lt;/p&gt;
 &lt;p&gt;1.查询轴 - 从此层次结构集中检索多个成员的数据。&lt;/p&gt;
 &lt;p&gt;2.切片器轴 - 从此层次结构集中检索单个成员的数据。&lt;/p&gt;            </description>
-            <pubDate>2016-07-05 14:51:27</pubDate>
-            <link>http://sikisama.github.io/blog/mdx.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/mdx.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/mdx.html</link>
+            <guid isPermaLink="true">//blog/mdx.html</guid>
                                                <category>database</category>
                                     </item>
                 <item>
@@ -1538,9 +1693,9 @@ summary: 正则规范
 &lt;h2 id=&quot;game&quot;&gt;game&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;http://regex.alf.nu/&quot;&gt;title&lt;/a&gt;
 &lt;a href=&quot;http://felixc.at/regex.alf.nu&quot;&gt;answer&lt;/a&gt;&lt;/p&gt;            </description>
-            <pubDate>2016-08-05 11:00:48</pubDate>
-            <link>http://sikisama.github.io/blog/reg_express.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/reg_express.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/reg_express.html</link>
+            <guid isPermaLink="true">//blog/reg_express.html</guid>
                                                <category>tool</category>
                                     </item>
                 <item>
@@ -1646,10 +1801,90 @@ git tag -a [v] [sha]&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&quot;http://codeigniter.org.cn/&quot;&gt;git参考手册&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000&quot;&gt;git教程&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;            </description>
-            <pubDate>2016-08-05 11:12:07</pubDate>
-            <link>http://sikisama.github.io/blog/git_instruction_manual.html</link>
-            <guid isPermaLink="true">http://sikisama.github.io/blog/git_instruction_manual.html</guid>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/git_instruction_manual.html</link>
+            <guid isPermaLink="true">//blog/git_instruction_manual.html</guid>
                                                <category>tool</category>
+                                    </item>
+                <item>
+            <title>欢迎使用GitBlog</title>
+            <description>
+            &lt;!--
+author: jockchou
+head: http://pingodata.qiniudn.com/jockchou-avatar.jpg
+date: 2015-07-31
+title: 欢迎使用GitBlog
+tags: GitBlog
+images: http://pingodata.qiniudn.com/cube2.jpg
+category: GitBlog
+status: publish
+summary: GitBlog是一个简单易用的Markdown博客系统，它不需要数据库，没有管理后台功能，更新博客只需要添加你写好的Markdown文件即可。
+--&gt;
+&lt;h2 id=&quot;一. 简介&quot;&gt;一. 简介&lt;/h2&gt;
+&lt;p&gt;GitBlog是一个简单易用的Markdown博客系统，它不需要数据库，没有管理后台功能，更新博客只需要添加你写好的Markdown文件即可。它摆脱了在线编辑器排版困难，无法实时预览的缺点，一切都交给Markdown来完成，一篇博客就是一个Markdown文件。同时也支持评论，代码高亮，数学公式，页面PV统计等常用功能。GitBlog提供了不同的主题样式，你可以根据自己的喜好配置，如果你想自己制作博客主题，也是非常容易的。GitBlog还支持整站静态导出，你完全可以导出整站静态网页部署到Github Pages。&lt;/p&gt;
+&lt;h2 id=&quot;二. 功能特点&quot;&gt;二. 功能特点&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;使用Markdown  &lt;/li&gt;
+&lt;li&gt;评论框  &lt;/li&gt;
+&lt;li&gt;代码高亮  &lt;/li&gt;
+&lt;li&gt;PV统计  &lt;/li&gt;
+&lt;li&gt;Latex数学公式  &lt;/li&gt;
+&lt;li&gt;自制主题  &lt;/li&gt;
+&lt;li&gt;响应式  &lt;/li&gt;
+&lt;li&gt;全站静态导出  &lt;/li&gt;
+&lt;li&gt;良好的SEO  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;三. GitBlog优势&quot;&gt;三. GitBlog优势&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;无需数据库，系统更轻量，移植更方便  &lt;/li&gt;
+&lt;li&gt;使用Markdown编写，摆脱后台编辑排版困难，无法实时预览的缺点  &lt;/li&gt;
+&lt;li&gt;可全站静态导出  &lt;/li&gt;
+&lt;li&gt;配置灵活，可自由开关某些功能  &lt;/li&gt;
+&lt;li&gt;多主题支持，可自制主题  &lt;/li&gt;
+&lt;li&gt;博客，分类，标签，归档  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;四. 环境要求&quot;&gt;四. 环境要求&lt;/h2&gt;
+&lt;p&gt;PHP 5.2.4+&lt;/p&gt;
+&lt;h2 id=&quot;五. 安装步骤&quot;&gt;五. 安装步骤&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;下载GitBlog源代码  &lt;/li&gt;
+&lt;li&gt;解压上传到你的PHP网站根目录  &lt;/li&gt;
+&lt;li&gt;打开浏览器，访问网站首页  &lt;/li&gt;
+&lt;li&gt;上传Markdown文件到&lt;code&gt;posts&lt;/code&gt;文件夹  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;六. 详细说明&quot;&gt;六. 详细说明&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/install.md&quot;&gt;1. 安装&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/struct.md&quot;&gt;2. 目录结构&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/config.md&quot;&gt;3. 配置说明&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/edit.md&quot;&gt;4. 编写博客&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/other-func.md&quot;&gt;5. 评论，订阅，统计等&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/cache.md&quot;&gt;6. 缓存机制&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/export.md&quot;&gt;7. 全站静态导出&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/theme.md&quot;&gt;8. 主题制作&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/nginx.md&quot;&gt;9. 在Nginx上运行GitBlog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/apache.md&quot;&gt;10. 在Apache上运行GitBlog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/sae.md&quot;&gt;11. 在SAE上运行GitBlog&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/github-pages.md&quot;&gt;12. 使用GitBlog和Github Pages搭建博客&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/update.md&quot;&gt;13. Gitblog升级&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/jockchou/gitblogdoc/tree/master/posts/gitblog/wordpress.md&quot;&gt;14. 从wordpress导入&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;七. 问题及bug反馈&quot;&gt;七. 问题及bug反馈&lt;/h2&gt;
+&lt;p&gt;如果在实际使用过程中对GitBlog有新的功能需求，或者在使用GitBlog的过程中发现了Bug，欢迎反馈给我。可以直接在Github上提交，也可以发邮件至&lt;code&gt;164068300[AT]qq.com&lt;/code&gt;与我取得联系，我将及时回复。如果你自己制作了漂亮好用的主题，也非常欢迎你提交给我，我会在这里展示你的主题链接。如果你正在使用GitBlog，也可以告诉我，我将也会在这里列出使用者名单。如果你想和其他GitBlog使用者讨论交流，欢迎加入QQ群&lt;code&gt;84692078&lt;/code&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;八. 使用者列表&quot;&gt;八. 使用者列表&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.hiweeds.net&quot;&gt;Weeds&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://xiaochengzi.sinaapp.com&quot;&gt;橙子&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://jockchou.com&quot;&gt;jockchou&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://github.com/jockchou/gitblogdoc&quot;&gt;GitBlog Doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://zxy.link&quot;&gt;zxy&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;九. 感谢&quot;&gt;九. 感谢&lt;/h2&gt;
+&lt;p&gt;GitBlog的成长需要喜欢Markdown，喜欢写博客的各位亲们支持！感谢你们使用GitBlog，感激你们对Gitblog的良好建议与Bug反馈。&lt;/p&gt;
+&lt;p&gt;QQ群：&lt;code&gt;84692078&lt;/code&gt;&lt;br /&gt;
+作者邮箱：&lt;code&gt;164068300[AT]qq.com&lt;/code&gt;    &lt;/p&gt;            </description>
+            <pubDate>2019-01-23 08:07:29</pubDate>
+            <link>//blog/welcome.html</link>
+            <guid isPermaLink="true">//blog/welcome.html</guid>
+                                               <category>GitBlog</category>
                                     </item>
             </channel>
 </rss>

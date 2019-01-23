@@ -3,15 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>javascript语言精粹-对象与函数|sikisama的博客</title>
-	<meta name="keywords" content="javascript,sikisama的博客">
+	<title>javascript语言精粹-对象与函数|蜻蜓的博客</title>
+	<meta name="keywords" content="javascript,蜻蜓的博客">
 	<meta name="description" content="javascript语言精粹读书笔记">
 	
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/bootstrap/css/bootstrap.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/assets/plugins/font-awesome/css/font-awesome.min.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/css/style.css?ver=2.2" type="text/css" media="all" />
 	<link rel="stylesheet" href="/theme/quest/css/customizer.css?ver=2.2" type="text/css" media="all" />
-	<link rel="alternate" type="application/rss+xml" title="sikisama的博客" href="http://sikisama.github.io/feed.xml" />
+	<link rel="alternate" type="application/rss+xml" title="蜻蜓的博客" href="//feed.xml" />
 	
 	</head>
 
@@ -22,8 +22,8 @@
 <div class="container">
 	<div class="row">
 		<div class="site-branding col-md-4">
-			<h1 class="site-title"><a href="http://sikisama.github.io" rel="home">sikisama的博客</a></h1>
-				<span class="site-description">知行合一</span>
+			<h1 class="site-title"><a href="/" rel="home">蜻蜓的博客</a></h1>
+				<span class="site-description"></span>
 		</div>
 		<!-- .site-branding -->
 	</div>
@@ -57,8 +57,8 @@ summary: javascript语言精粹读书笔记
 <li>javascript中，对象是可变的键控集合（keyed collection）。对象是属性的容器，其中每个属性都拥有名字和值。属性的名字可以是包含字符串在内的任意字符。属性值可以是除undefined值外的任何值。</li>
 <li>javascript 包含一个原型链的特性，允许对象继承另外一个对象的属性。</li>
 <li>
-<p>一个对象的字面量就是包围在一对花括号中的零或多个【键值对】。</p>
-<p>'||' 会取第一个为true的,'&amp;&amp;'会尝试取到最后一个为true的（遇到false停止）
+<p>一个对象的字面量就是包围在一对花括号中的零或多个【键值对】。
+'||' 会取第一个为true的,'&amp;&amp;'会尝试取到最后一个为true的（遇到false停止）
 可以用 '||' 来填充默认值 </p>
 <pre><code>var person = {'name':'zxf','age':24};
 var status = person.status || "unknown";
@@ -83,7 +83,7 @@ person.hasOwnProperty('name');</code></pre>
 <li>javascript中函数就是对象。对象是【名/值】对的集合并拥有一个连接到原型对象的隐藏连接。对象的字面常量连接到Object.protoype（也是一个object）。</li>
 </ul>
 <p>因为函数时对象，所以他们可以像任何其他值一样被使用。
-函数可以在保存变量、对象和数组中。函数可以被当做参数传递给其他函数，函数也可以再返回函数。而且，因为函数时对象，所以函数可以拥有方法。</p>
+函数可以在保存变量、对象和数组中。函数可以被当做参数传递给其他函数，函数也可以再返回函数。而且，因为函数是对象，所以函数可以拥有方法。</p>
 <blockquote>
 <p>函数的与众不同在于他们可以被调用。</p>
 </blockquote>
@@ -381,27 +381,7 @@ var name = coolCat.get_name();
                    <li><a href="/tags/344866780.html" rel="tag">javascript</a></li>
         	</ul>
 		
-	</footer><!-- .entry-footer --></article><!-- #post-## -->            			<div id="comments" class="clearfix">
-	<div id="respond" class="comment-respond">
-		<!-- 多说评论框 start -->
-		<div class="ds-thread" data-thread-key="d7a84ef777a3cf6343b48356bdaea952" data-title="javascript语言精粹-对象与函数" data-url="http://sikisama.github.io/blog/js_thegoodpart_object_function.html"></div>
-		<!-- 多说评论框 end -->
-		<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-		<script type="text/javascript">
-		var duoshuoQuery = {short_name:"sikisama"};
-		(function() {
-			var ds = document.createElement('script');
-			ds.type = 'text/javascript';ds.async = true;
-			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-			ds.charset = 'UTF-8';
-			(document.getElementsByTagName('head')[0] 
-			 || document.getElementsByTagName('body')[0]).appendChild(ds);
-		})();
-		</script>
-        <!-- 多说公共JS代码 end -->
-	</div><!-- #respond -->
-</div>
-					</div>
+	</footer><!-- .entry-footer --></article><!-- #post-## -->            								</div>
 					<!-- #main -->
 				</div>
 				<!-- #primary -->
@@ -419,47 +399,50 @@ var name = coolCat.get_name();
 </aside>	<aside class="widget widget_categories sidebar-widget clearfix">
 	<h3 class="widget-title">分类目录</h3>
 	<ul>
-		        <li class="cat-item"><a href="/category/1546329087.html" >tool</a></li>
-                <li class="cat-item"><a href="/category/344866780.html" >javascript</a></li>
+		        <li class="cat-item"><a href="/category/344866780.html" >javascript</a></li>
+                <li class="cat-item"><a href="/category/1546329087.html" >tool</a></li>
                 <li class="cat-item"><a href="/category/375327200.html" >database</a></li>
                 <li class="cat-item"><a href="/category/26890208.html" >PHP</a></li>
+                <li class="cat-item"><a href="/category/107260689.html" >GitBlog</a></li>
         	</ul>
 </aside>
 	<aside class="widget widget_archive sidebar-widget clearfix">
 	<h3 class="widget-title">文章归档</h3>
 	<ul>
+		<li><a href="/archive/201507.html">2015-07</a></li>
 		<li><a href="/archive/201607.html">2016-07</a></li>
-		<li><a href="/archive/201609.html">2016-09</a></li>
 		<li><a href="/archive/201608.html">2016-08</a></li>
 		<li><a href="/archive/201606.html">2016-06</a></li>
+		<li><a href="/archive/201609.html">2016-09</a></li>
 		</ul>
 </aside>	<aside class="widget widget_recent_entries sidebar-widget clearfix">
 	<h3 class="widget-title">近期文章</h3>
 	<ul>
-	    <li><a href="/blog/js_thegoodpart_regex.html">javascript语言精粹-正则表达式</a></li>
+	    <li><a href="/blog/angularJs_cmd.html">AngularJs-指令</a></li>
+        <li><a href="/blog/js_thegoodpart_regex.html">javascript语言精粹-正则表达式</a></li>
         <li><a href="/blog/js_thegoodpart_array.html">javascript语言精粹-数组</a></li>
         <li><a href="/blog/js_thegoodpart_object_function.html">javascript语言精粹-对象与函数</a></li>
         <li><a href="/blog/php_access_share.html">php访问网络共享资源和本地文件</a></li>
-        <li><a href="/blog/js_closure.html">javascript-闭包</a></li>
     	</ul>
 </aside>
 	<aside class="widget widget_tag_cloud sidebar-widget clearfix">
 	<h3 class="widget-title">标签</h3>
 	<div class="tagcloud">
-		<a href="/tags/1141897447.html"  title="Git" >Git</a>
 		<a href="/tags/344866780.html"  title="javascript" >javascript</a>
+		<a href="/tags/1141897447.html"  title="Git" >Git</a>
 		<a href="/tags/887333414.html"  title="mdx" >mdx</a>
 		<a href="/tags/2062854272.html"  title="nodejs" >nodejs</a>
 		<a href="/tags/26890208.html"  title="PHP" >PHP</a>
 		<a href="/tags/1975848522.html"  title="windows" >windows</a>
 		<a href="/tags/1757610452.html"  title="阻塞模式" >阻塞模式</a>
 		<a href="/tags/372555671.html"  title="正则表达式" >正则表达式</a>
+		<a href="/tags/107260689.html"  title="GitBlog" >GitBlog</a>
 		</div>
 </aside>
 	<aside class="widget widget_text sidebar-widget clearfix">
 	<h3 class="widget-title">介绍</h3>
 	<div class="textwidget">
-		<p>努力 友情 胜利</p>
+		<p>享工作 乐生活</p>
 	</div>
 </aside>
 </div><!-- #secondary -->			</div>
